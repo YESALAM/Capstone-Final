@@ -24,22 +24,20 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.FilterQueryProvider;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-import io.github.yesalam.bhopalbrts.Bhopal_BRTS;
+import io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS;
 import io.github.yesalam.bhopalbrts.R;
-import io.github.yesalam.bhopalbrts.RouteDetailActivity;
-import io.github.yesalam.bhopalbrts.SelectStopActivity;
+import io.github.yesalam.bhopalbrts.Activity.RouteDetailActivity;
+import io.github.yesalam.bhopalbrts.Activity.SelectStopActivity;
 import io.github.yesalam.bhopalbrts.adapter.CardAdapter;
 import io.github.yesalam.bhopalbrts.datamodel.CardData;
 import io.github.yesalam.bhopalbrts.util.AssetDatabaseHelper;
 import io.github.yesalam.bhopalbrts.util.Calculator;
-import io.github.yesalam.bhopalbrts.util.DataBaseHelper;
 
 import java.util.List;
 

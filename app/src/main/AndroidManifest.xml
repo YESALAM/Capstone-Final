@@ -32,7 +32,7 @@
 
         <activity
 
-            android:name=".Bhopal_BRTS"
+            android:name=".Activity.Bhopal_BRTS"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
@@ -45,45 +45,45 @@
         </activity>
         <activity
 
-            android:name=".SelectStopActivity"
+            android:name=".Activity.SelectStopActivity"
             android:label="@string/title_activity_select_stop"
             android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".Bhopal_BRTS"
+            android:parentActivityName=".Activity.Bhopal_BRTS"
 
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="io.github.yesalam.bhopalbrts.Bhopal_BRTS" />
+                android:value="io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS" />
         </activity>
 
         <activity
 
-            android:name=".RouteDetailActivity"
+            android:name=".Activity.RouteDetailActivity"
             android:label="@string/title_activity_card_detail"
-            android:parentActivityName=".Bhopal_BRTS"
+            android:parentActivityName=".Activity.Bhopal_BRTS"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="io.github.yesalam.bhopalbrts.Bhopal_BRTS" />
+                android:value="io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS" />
         </activity>
 
         <activity
-            android:name=".AboutBRTS"
+            android:name=".Activity.AboutBRTS"
             android:label="@string/title_activity_about_brts"
-            android:parentActivityName=".Bhopal_BRTS"
+            android:parentActivityName=".Activity.Bhopal_BRTS"
 
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="io.github.yesalam.bhopalbrts.Bhopal_BRTS" />
+                android:value="io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS" />
         </activity>
         <activity
-            android:name=".AboutDevloper"
+            android:name=".Activity.AboutDevloper"
             android:label="@string/title_activity_about_devloper"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="io.github.yesalam.bhopalbrts.Bhopal_BRTS" />
+                android:value="io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS" />
         </activity>
 
         <activity

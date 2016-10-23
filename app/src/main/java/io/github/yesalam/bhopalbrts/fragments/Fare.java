@@ -27,12 +27,11 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import io.github.yesalam.bhopalbrts.Bhopal_BRTS;
+import io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS;
 import io.github.yesalam.bhopalbrts.R;
-import io.github.yesalam.bhopalbrts.SelectStopActivity;
+import io.github.yesalam.bhopalbrts.Activity.SelectStopActivity;
 import io.github.yesalam.bhopalbrts.util.AssetDatabaseHelper;
 import io.github.yesalam.bhopalbrts.util.Calculator;
-import io.github.yesalam.bhopalbrts.util.DataBaseHelper;
 
 /**
  * This fragment is for minimum fare calculation between two stops . Stops

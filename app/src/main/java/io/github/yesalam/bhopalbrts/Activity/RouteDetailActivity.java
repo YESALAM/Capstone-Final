@@ -1,4 +1,4 @@
-package io.github.yesalam.bhopalbrts;
+package io.github.yesalam.bhopalbrts.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import io.github.yesalam.bhopalbrts.Interface.ShowInfoListener;
+import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.adapter.RouteActivityPagerAdapter;
 import io.github.yesalam.bhopalbrts.datamodel.Stop;
 import io.github.yesalam.bhopalbrts.fragments.RouteMap;

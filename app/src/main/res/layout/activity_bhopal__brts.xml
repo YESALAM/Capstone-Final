@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/green_at_ground"
     android:orientation="vertical"
-    tools:context=".Bhopal_BRTS"   >
+    tools:context=".Activity.Bhopal_BRTS"   >
 
     <android.support.design.widget.TabLayout
         android:id="@+id/sliding_tabs"

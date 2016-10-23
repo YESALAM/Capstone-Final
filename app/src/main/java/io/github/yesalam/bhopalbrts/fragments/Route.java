@@ -17,9 +17,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import io.github.yesalam.bhopalbrts.Bhopal_BRTS;
+import io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS;
 import io.github.yesalam.bhopalbrts.R;
-import io.github.yesalam.bhopalbrts.RouteDetailActivity;
+import io.github.yesalam.bhopalbrts.Activity.RouteDetailActivity;
 import io.github.yesalam.bhopalbrts.adapter.RouteListAdapter;
 
 import java.util.ArrayList;

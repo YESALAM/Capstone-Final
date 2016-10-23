@@ -14,9 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import io.github.yesalam.bhopalbrts.AboutBRTS;
-import io.github.yesalam.bhopalbrts.AboutDevloper;
-import io.github.yesalam.bhopalbrts.Bhopal_BRTS;
+import io.github.yesalam.bhopalbrts.Activity.AboutBRTS;
+import io.github.yesalam.bhopalbrts.Activity.AboutDevloper;
+import io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS;
 import io.github.yesalam.bhopalbrts.R;
 
 /**

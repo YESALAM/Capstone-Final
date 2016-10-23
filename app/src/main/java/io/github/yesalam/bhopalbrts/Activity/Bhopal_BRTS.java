@@ -1,7 +1,6 @@
-package io.github.yesalam.bhopalbrts;
+package io.github.yesalam.bhopalbrts.Activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -9,16 +8,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+
+import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.adapter.TabPagerAdapter;
 import io.github.yesalam.bhopalbrts.util.DataBaseHelper;
-
-import java.io.IOException;
-import java.sql.SQLException;
 
 public class Bhopal_BRTS extends AppCompatActivity {
 

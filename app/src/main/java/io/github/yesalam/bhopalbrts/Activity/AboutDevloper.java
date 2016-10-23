@@ -1,4 +1,4 @@
-package io.github.yesalam.bhopalbrts;
+package io.github.yesalam.bhopalbrts.Activity;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import io.github.yesalam.bhopalbrts.adapter.AboutDevelopersPagerAdapter;
+import io.github.yesalam.bhopalbrts.R ;
 
 /**
  * Created by yesalam on 22-08-2015.

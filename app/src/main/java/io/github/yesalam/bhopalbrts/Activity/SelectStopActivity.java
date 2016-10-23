@@ -1,4 +1,4 @@
-package io.github.yesalam.bhopalbrts;
+package io.github.yesalam.bhopalbrts.Activity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,6 +28,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+
+import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.datamodel.Stop;
 import io.github.yesalam.bhopalbrts.util.AssetDatabaseHelper;
 
