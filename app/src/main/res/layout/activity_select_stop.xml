@@ -5,7 +5,7 @@
     android:paddingBottom="10dp"
     android:orientation="vertical"
     android:background="@drawable/green_at_ground"
-    tools:context="com.seatech.alam.bhopalbrts.SelectStopActivity">
+    tools:context=".Activity.SelectStopActivity">
 
 
     <FrameLayout
