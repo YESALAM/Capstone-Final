@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+    <!--  android:background="@drawable/green_at_ground_all" -->
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/routeListView"
+        android:layout_gravity="center_horizontal"
+        android:divider="#D1543F"
+        android:dividerHeight="1.0dp"
+
+        android:drawSelectorOnTop="true"
+         />
+   <!-- android:listSelector="@drawable/state_selector_list"-->
+
+</LinearLayout>

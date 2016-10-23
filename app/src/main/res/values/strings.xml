@@ -1,0 +1,90 @@
+<resources>
+    <string name="app_name">Bhopal BRTS</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="banner_ad_unit_id">ca-app-pub-5461664183711638/8475377903</string>
+    <string name="title_bus">Bus</string>
+    <string name="title_fare">Fare</string>
+    <string name="title_route">Route</string>
+    <string name="title_more">More</string>
+    <string name="From">From</string>
+    <string name="To">To</string>
+    <string name="hint_startst">Enter Origin</string>
+    <string name="hint_destst">Enter Destination</string>
+    <string name="action_info">Info</string>
+    <string name="SearchRoute">Search Route</string>
+    <string name="getFare">Get Fare</string>
+    <string name="title_activity_select_stop">Select Bus Stop</string>
+    <string name="typeToSearch">Type to Search</string>
+    <string name="Fare">Fare :</string>
+    <string name="title_activity_route_detail">Route Detail</string>
+    <string name="title_activity_card_detail">Route Detail</string>
+    <string name="action_map">Map</string>
+    <string name="action_list">Detail</string>
+    <string name="title_activity_launche">Bhopal BRTS</string>
+    <string name="Rs">\u20B9</string>
+    <string name="rs">\u20A8</string>
+    <string name="title_activity_about_brts">About BRTS</string>
+    <string name="title_activity_about_devloper">About Devlopers</string>
+    <string name="action_share">Share App</string>
+    <string name="local_police">tel:100</string>
+    <string name="about_us_detail">We are group of  students with common motive to solve common problem with the help of technology (Praudyogiki aka Jugad) available .  </string>
+    <string name="bhopal_brts_detail">
+        <![CDATA[
+            <p><strong>BHOPAL,</strong> the capital of Madhya Pradesh, is a fascinating  amalgamation of scenic beauty, old historic flavor and modern urban planning.  It is also known as the “City of Lakes”. Today Bhopal has blossomed into a  city, which in spite of being modern, upholds the patrician mark of its bygone  rulers.  </p>
+        <p>To answer the needs of the growing  traffic and to ensure that people move around in the city in an efficient and  comfortable manner. A <strong>Special Purpose  Vehicle (SPV)</strong> in the name of <strong>Bhopal  City Link Ltd (BCLL)</strong> is majorly owned company of <strong>Bhopal Municipal Corporation</strong>, incorporated in 2006 to provide an  organized dimensions to public transportation of Bhopal, a city on fast track  of development with honorable Mayor at its chain and Municipal Commissioner as  Managing Director supported by an independent Chief Executive Officer (CEO).  BCLL has been successful in fulfilling the municipal responsibility of  providing Motor Transport facility for the conveyance of public mandated under  Sec 66 (S) of Municipal Corporation Act. Its Caravan, which begin with just 30  buses in 2006, after receiving JnNURM Sanction, has grown to 225 buses  comprising of AC Low Floor and Super Luxury Volvo Buses. Presently 185  no. of 900 mm floor ht. Buses ; 20 no. of AC 400 mm floor ht. Buses are  plying on the different 12 approved routes of Bhopal city including BRTS route.</p>
+        ]]>
+    </string>
+    <string name="brts_office"><![CDATA[
+        <p><b>Bhopal City Link Ltd.</b><br>
+        2nd Floor, Harshwardhan Complex,<br>
+        Mata Mandir Square, T.T. Nagar,<br>
+        <strong>Bhopal (MP) 462003<br>
+        OR CALL US:</strong> +91 755-4074843<br>
+        <strong>EMAIL US:</strong> <a href="mailto:bcll_bpl@rediffmail.com" target="_blank">bcll_bpl@rediffmail.com</a></p>
+    ]]></string>
+
+    <string name="about_app_detail"><![CDATA[
+        <p>Credited as one of the first full feature bus information application in the city , <b>Bhopal BRTS</b> serves you with a well organised information regarding the city bus services in the capital.</p>
+        <p>Theme of the app is the Theme of this beautiful city . <b>Clean and Green</b> . By use of <b>BRTS</b> not just we are solving the traffic problem but also helping to nature by controlled pollution .</p>
+        <p>Treating the need of improvement as a gospel, we welcome your feedback ans suggestions and are obliged to update you with the most recent alterations .</p>
+    ]]>
+    </string>
+    <string name="contact_us_detail"><![CDATA[
+
+        Web         :  <a href="http://seatech.me">seatech.me</a><br>
+        Email       :  <a href="mailto:reach2seatech@gmail.com" target="_blank">reach2seatech@gmail.com</a><br>
+        Facebook    :  <a href="http://fb.com/bhopalbrts" >fb.com/bhopalbrts </a>
+
+
+    ]]></string>
+
+    <string name="tandc"><![CDATA[
+        <p>The data and specifications mentioned in here are based on information provided by Google Search and BRTS. We share no terms or alliance with My Bus or Bhopal Municipal Corp.</p>
+        <p>The data in real time is subject to change. We did our best to compile recent and most accurate data; will be held responsible in no case regarding on spot data changes. Updates for data will be distributed within 2-3 days after the alterations by My Bus.</p>
+        <p> Your access to and use of this service is bound by the acceptance and compliance of these terms. These terms apply to all visitors, users and other who use or access the service.</p>
+        <p>Termination:<br>
+        We may terminate the service anytime, without any notice, with no reason whatsoever if found breaching of the above terms.</p>
+    ]]></string>
+
+    <string name="thank"><![CDATA[
+
+        <p>College Institution for encouragement to implement ideas.</p>
+        <p>Google and My Bus for providing data required.</p>
+        <p>Udacity for providing tutorial support.</p>
+        <p>Municipal Corp. Bhopal for provoking the “Clean and Green Theme”.</p>
+        <p>Special thanks to the mentors, parents and supporters for guidance, allowance, permissions and resources.</p>
+        <p>Shivam Nema, Aditya Upadhyaay , Sanjiv Singh and Varun Singh for testing and contributions.</p>
+        <p>Varun Singh for feedback on  Icons.</p>
+        <p>Thank you users!</p>
+    ]]></string>
+    <string name="contact_alam_detail"><![CDATA[
+            <p>
+        Phone       :  +918982384594 <br>
+        Email       :  <a href="mailto:itisalam@gmail.com" target="_blank">itisalam@gmail.com</a><br>
+        Facebook    :  <a href="http://fb.com/sadarealam786" >fb.com/sadarealam786 </a><br>
+        Twitter     :  <a href="http://twitter.com/nextisalam">twitter.com/nextisalam</a><br>
+        </p>
+    ]]></string>
+
+</resources>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SeATech"
+                android:textSize="35dp"
+                android:textColor="@android:color/primary_text_light_nodisable"
+                android:gravity="center_horizontal"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pragat Praudyogiki Samooh"
+                android:gravity="center_horizontal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/about_us_detail"
+                android:text="@string/about_us_detail"
+                android:layout_marginTop="20dp"
+
+                android:textSize="18sp"
+                />
+
+           <RelativeLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center_horizontal"
+               android:paddingLeft="20dp"
+               android:layout_marginTop="10dp"
+               >
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/ic_launcher"
+                   android:id="@+id/bus_icon"
+                   />
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/app_name"
+                   android:text="Bhopal BRTS"
+                   android:textSize="35dp"
+                   android:textColor="@android:color/primary_text_light_nodisable"
+                   android:layout_toRightOf="@id/bus_icon"
+                   />
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="version 1.1.1 (Naina)"
+                   android:gravity="center_horizontal"
+                   android:layout_below="@+id/app_name"
+                   />
+
+
+           </RelativeLayout>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:id="@+id/about_app_detail"
+                android:text="about_app"
+                android:textSize="18sp"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

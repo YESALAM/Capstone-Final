@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+    <!-- android:background="@drawable/green_at_ground_all" -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:clipToPadding="false"
+
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/brts_info"
+                android:text="About BRTS"
+                android:textSize="25sp"
+                android:textColor="@color/secondary"
+                android:elevation="10dp"
+
+                android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bhopal BRTS"
+                    style="@style/AboutTextItem"
+                    android:id="@+id/bhopal_brts"
+
+                    />
+                <View
+
+                    style="@style/AboutDividerItem"
+                    android:layout_width="fill_parent"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Contact"
+                    style="@style/AboutTextItem"
+                    android:id="@+id/contact_brts"
+
+                    />
+                <View
+
+                    style="@style/AboutDividerItem"
+                    android:layout_width="fill_parent"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Terms and Conditions"
+                    style="@style/AboutTextItem"
+                    android:id="@+id/tandc"
+
+                    />
+                <View
+
+                    style="@style/AboutDividerItem"
+                    android:layout_width="fill_parent"
+
+                    />
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="About Devlopers"
+                android:textSize="25sp"
+                android:elevation="10dp"
+                android:textColor="@color/secondary"
+                android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="About us"
+                    style="@style/AboutTextItem"
+                    android:id="@+id/about_us"
+                    />
+                <View
+                    android:id="@+id/divider"
+                    style="@style/AboutDividerItem"
+                    android:layout_width="fill_parent"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Contact us"
+                    style="@style/AboutTextItem"
+                    android:id="@+id/contact_us"
+                    />
+                <View
+
+                    style="@style/AboutDividerItem"
+                    android:layout_width="fill_parent"
+
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thanks to you"
+                    style="@style/AboutTextItem"
+                    android:id="@+id/thanku"
+                    />
+                <View
+
+                    style="@style/AboutDividerItem"
+                    android:layout_width="fill_parent"
+
+                    />
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</LinearLayout>

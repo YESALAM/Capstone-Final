@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Emergency Nos"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/textView2" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:shrinkColumns="1"
+                android:padding="15dp"
+                >
+
+                <TableRow>
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Services"
+
+                        android:textSize="20sp"
+                        android:padding="3dip" />
+                    <TextView
+                        android:text="Telephone"
+                        android:textSize="20sp"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Local Police"
+                        style="@style/table_row"
+                        />
+                    <TextView
+                        android:text="100"
+                        android:gravity="right"
+                        style="@style/table_row"
+                        android:id="@+id/local_police"
+
+                        />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Woman Helpline"
+                        style="@style/table_row" />
+                    <TextView
+                        android:text="1090"
+                        android:gravity="right"
+                        style="@style/table_row"
+                        android:id="@+id/woman_helpline"
+                        />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_column="1"
+                        android:text="CM Helpline"
+                        style="@style/table_row" />
+                    <TextView
+                        android:text="181"
+                        android:gravity="right"
+                        android:id="@+id/cm_helpline"
+                        style="@style/table_row" />
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Railway Enquiry"
+                        style="@style/table_row" />
+                    <TextView
+                        android:text="131"
+                        android:gravity="right"
+                        android:id="@+id/railway_enquiry"
+                        style="@style/table_row" />
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Emergency response Services for\nMedical, Fire Brigade and Police"
+                        style="@style/table_row" />
+                    <TextView
+                        android:text="108"
+                        android:gravity="right"
+                        android:id="@+id/emergency_response_services"
+                        style="@style/table_row" />
+                </TableRow>
+
+
+            </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="Helpline NOs - BCLL"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:shrinkColumns="1"
+                android:padding="15dp"
+                >
+
+
+                <TableRow>
+                    <TextView
+                        android:layout_column="1"
+                        android:text="My Bus Help Line"
+                        style="@style/table_row"
+                        />
+                    <TextView
+                        android:text="+91 755-3199966"
+                        android:gravity="right"
+                        style="@style/table_row"
+                        android:autoLink="all"
+                        />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_column="1"
+                        android:text=""
+                        style="@style/table_row" />
+                    <TextView
+                        android:text="+91 755-4074843"
+                        android:gravity="right"
+                        style="@style/table_row" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Chartered Bus(Volvo)"
+                        style="@style/table_row" />
+                    <TextView
+                        android:text="+919993288888"
+                        android:gravity="right"
+                        style="@style/table_row" />
+                </TableRow>
+              <!--  <TableRow>
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Bhopal->Indore->Bhopal"
+                        style="@style/table_row" />
+                    <TextView
+                        android:text="+91993288888"
+                        android:gravity="right"
+                        style="@style/table_row" />
+                </TableRow>-->
+                <TableRow>
+                    <TextView
+                        android:layout_column="1"
+                        android:text="My Cab(City Taxi Services)"
+                        style="@style/table_row"
+
+                        />
+                    <TextView
+                        android:text="          +91 755-6666666"
+                        android:gravity="right"
+                        style="@style/table_row"
+
+                        />
+                </TableRow>
+
+
+            </TableLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Office Location"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                />
+
+            <TextView
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/brts_office"
+
+                style="@style/table_row"
+                />
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="routes_array">
+        <item>SR1</item>
+        <item>SR2</item>
+        <item>SR3</item>
+        <item>SR4</item>
+        <item>SR5</item>
+        <item>SR6</item>
+        <item>SR7</item>
+        <item>SR8</item>
+        <item>TR1</item>
+        <item>TR2</item>
+        <item>TR3</item>
+        <item>TR4</item>
+        <item>TR4A</item>
+        <item>TR4AC</item>
+    </string-array>
+    <string-array name="stop_count">
+        <item>34 Stops</item>
+        <item>46 Stops</item>
+        <item>58 Stops</item>
+        <item>49 Stops</item>
+        <item>54 Stops</item>
+        <item>49 Stops</item>
+        <item>57 Stops</item>
+        <item>54 Stops</item>
+        <item>53 Stops</item>
+        <item>40 Stops</item>
+        <item>41 Stops</item>
+        <item>46 Stops</item>
+        <item>54 Stops</item>
+        <item>46 Stops</item>
+    </string-array>
+    <string-array name="route_nodes">
+        <item>HALALPUR BUS STAND To BAIRAGARH CHINCHLI</item>
+        <item>KATARA HILL To NEHRU NAGAR</item>
+        <item>TILAK NAGAR To GANDHI NAGAR BUS STAND</item>
+        <item>OVER BRIDGE To BAIRAGARH CHINCHLI</item>
+        <item>CHIRAYU HOSPITAL To HANDICAPT (KHAJURI KALAN)</item>
+        <item>AYODHYA NAGAR To NILBAD TIRAHA</item>
+        <item>GANDHI NAGAR To ORIENTAL COLLEGE</item>
+        <item>BAIRAGARH CHINCHLI To COACH FACTORY</item>
+        <item>CHIRAYU HOSPITAL To AKRITI ECO CITY</item>
+        <item>NADRA BUS STAND To HEG MANDIDEEP</item>
+        <item>SABRI NAGAR To ORIENTAL COLLEGE</item>
+        <item>SEHORE NAKA To MISROD</item>
+        <item>SEHORE NAKA To BANGRASIA</item>
+        <item>SEHORE NAKA To MISROD</item>
+    </string-array>
+
+</resources>
