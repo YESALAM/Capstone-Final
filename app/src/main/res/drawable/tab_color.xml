@@ -4,12 +4,12 @@
     <item
         android:state_selected="false"
         android:state_pressed="false"
-        android:drawable="@color/tab_layout_color" />
+        android:drawable="@color/primary" />
 
     <item android:state_pressed="true"
-        android:drawable="@color/tab_layout_color_active" />
+        android:drawable="@color/primary" />
 
     <item android:state_selected="true"
         android:state_pressed="false"
-        android:drawable="@color/tab_layout_color_active" />
+        android:drawable="@color/primary" />
 </selector>

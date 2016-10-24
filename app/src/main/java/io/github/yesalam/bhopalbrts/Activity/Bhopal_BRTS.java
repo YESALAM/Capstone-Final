@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.adapter.TabPagerAdapter;
@@ -32,7 +33,7 @@ public class Bhopal_BRTS extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bhopal__brts);
+        setContentView(R.layout.activity_bhopal_brts);
         //setting = getSharedPreferences(PREFERENCE_NAME,0);
         //Reason of the very first bug of my this software.
         //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -57,6 +58,8 @@ public class Bhopal_BRTS extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
          mAdView = (AdView) findViewById(R.id.adViewmain);
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
+
 
 
         // Create the adapter that will return a fragment for each of the four
@@ -75,8 +78,8 @@ public class Bhopal_BRTS extends AppCompatActivity {
         }*/
 
 
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
+
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
 
