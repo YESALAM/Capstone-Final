@@ -9,8 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+
 import io.github.yesalam.bhopalbrts.Interface.ShowInfoListener;
 import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.adapter.RouteActivityPagerAdapter;
@@ -29,23 +28,21 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
     static ArrayList<Stop> stoplist ;
     ViewPager viewPager;
     RouteActivityPagerAdapter pagerAdapter ;
-    AdView mAdView ;
+
     int flag = 0 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_detail);
-        mAdView = (AdView) findViewById(R.id.adViewroute);
+
         initialize();
 
         pagerAdapter = new RouteActivityPagerAdapter(getSupportFragmentManager(),stoplist) ;
         viewPager = (ViewPager) findViewById(R.id.routepager) ;
         viewPager.setAdapter(pagerAdapter);
 
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
-        mAdView.loadAd(adRequest);
+
     }
 
 

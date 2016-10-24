@@ -20,7 +20,7 @@ public class AboutBRTS extends AppCompatActivity {
     ViewPager viewPager;
     AboutBRTSPagerAdapter pagerAdapter ;
     TextView tv ;
-    AdView mAdView ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class AboutBRTS extends AppCompatActivity {
         int id = getIntent().getIntExtra("_id",0);
         pagerAdapter = new AboutBRTSPagerAdapter(getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(R.id.about_brts_pager);
-        mAdView = (AdView) findViewById(R.id.adViewbrts);
+
         viewPager.setAdapter(pagerAdapter);
 
         switch (id){
@@ -43,9 +43,7 @@ public class AboutBRTS extends AppCompatActivity {
                 viewPager.setCurrentItem(2);
                 break;
         }
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
-        mAdView.loadAd(adRequest);
+
 
     }
 

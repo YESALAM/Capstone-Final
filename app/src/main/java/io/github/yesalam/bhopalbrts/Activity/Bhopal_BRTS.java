@@ -27,7 +27,6 @@ public class Bhopal_BRTS extends AppCompatActivity {
     //DataBaseHelper dbhelper ;
     TabLayout tabLayout;
     //public static SharedPreferences setting;
-    AdView mAdView ;
 
 
     @Override
@@ -57,7 +56,6 @@ public class Bhopal_BRTS extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-         mAdView = (AdView) findViewById(R.id.adViewmain);
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
 
 
@@ -79,8 +77,7 @@ public class Bhopal_BRTS extends AppCompatActivity {
 
 
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+
 
 
 

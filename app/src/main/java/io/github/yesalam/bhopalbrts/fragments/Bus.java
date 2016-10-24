@@ -63,7 +63,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
     ListView listView ;
     CardAdapter cadapter;
     RelativeLayout input_area ;
-    //LinearLayout main_layout ;
+
 
 
     SimpleCursorAdapter adapter;
@@ -78,7 +78,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
     }
 
     private void initialize(){
-       // main_layout = (LinearLayout) getView().findViewById(R.id.main_layout_bus);
+
         input_area = (RelativeLayout) getView().findViewById(R.id.input_area);
         actvfrom = (AutoCompleteTextView) getView().findViewById(R.id.autoCompleteTextViewFindRouteFrom);
         actvto = (AutoCompleteTextView) getView().findViewById(R.id.autoCompleteTextViewFindRouteTo);
@@ -197,8 +197,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
     }
 
     public void onStart(){
-        //setting = activity.setting ;
-        //setting.edit().putInt("tab_id",3).commit();
+
         super.onStart();
         initialize();
         moveViewToScreenCenter(bus_motion);
@@ -228,22 +227,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
                     listView.setVisibility(View.GONE);
                     bus_motion.invalidate();
 
-
-                    //int main_layout_height = main_layout.getHeight() ;
-                    //int input_area_height = input_area.getHeight() ;
-
                     searchHandler(from, to);
-
-                    //int list_view_height = setListViewHeightBasedOnChildren(listView) ;
-
-                    // Only hide the input area if remaining space is not able to accommodate the list view.
-
-                  /*  if((main_layout_height-input_area_height)>list_view_height) {
-
-                    } else{
-                        input_area.setVisibility(View.GONE);
-
-                    }*/
                 }
 
                 break;
@@ -323,10 +307,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
         totalHeight = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
 
         return totalHeight ;
-       /* ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
-        listView.requestLayout();*/
+
     }
 
 

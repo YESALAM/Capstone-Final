@@ -18,7 +18,7 @@ public class AboutDevloper extends AppCompatActivity {
     private final String LOG_TAG = AboutDevloper.class.getSimpleName();
     ViewPager viewPager;
     AboutDevelopersPagerAdapter pagerAdapter ;
-    AdView mAdView ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class AboutDevloper extends AppCompatActivity {
 
         pagerAdapter = new AboutDevelopersPagerAdapter(getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(R.id.about_developer_pager);
-        mAdView = (AdView) findViewById(R.id.adViewdevelopers);
+
         viewPager.setAdapter(pagerAdapter);
 
         int id = getIntent().getIntExtra("_id",0);
@@ -43,9 +43,7 @@ public class AboutDevloper extends AppCompatActivity {
                 break;
         }
 
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
-        mAdView.loadAd(adRequest);
+
 
     }
 
