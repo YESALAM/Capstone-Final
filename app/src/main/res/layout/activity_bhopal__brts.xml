@@ -28,14 +28,7 @@
 
         />
     <!-- android:background="@drawable/green_at_ground_all"-->
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adViewmain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"/>
+
 
 </RelativeLayout>
 

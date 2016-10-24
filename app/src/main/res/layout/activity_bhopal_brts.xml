@@ -67,15 +67,7 @@
         android:background="@drawable/green_at_ground"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <com.google.android.gms.ads.AdView
-    android:id="@+id/adViewmain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id">
-    </com.google.android.gms.ads.AdView>
+
 
 
 </RelativeLayout>

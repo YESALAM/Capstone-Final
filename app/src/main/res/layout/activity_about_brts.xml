@@ -11,7 +11,6 @@
         android:id="@+id/about_brts_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/adViewbrts"
         >
         <android.support.v4.view.PagerTitleStrip
             android:id="@+id/pager_title_strip"
@@ -24,13 +23,6 @@
             android:paddingBottom="4dp" />
     </android.support.v4.view.ViewPager>
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adViewbrts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"/>
+
 
 </RelativeLayout>
