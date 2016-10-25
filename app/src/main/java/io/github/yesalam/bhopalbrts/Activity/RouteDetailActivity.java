@@ -2,7 +2,6 @@ package io.github.yesalam.bhopalbrts.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,7 +14,7 @@ import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.adapter.RouteActivityPagerAdapter;
 import io.github.yesalam.bhopalbrts.datamodel.Stop;
 import io.github.yesalam.bhopalbrts.fragments.RouteMap;
-import io.github.yesalam.bhopalbrts.util.AssetDatabaseHelper;
+import io.github.yesalam.bhopalbrts.data.AssetDatabaseHelper;
 
 import java.util.ArrayList;
 

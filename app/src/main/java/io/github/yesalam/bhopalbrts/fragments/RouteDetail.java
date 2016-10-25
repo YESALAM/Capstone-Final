@@ -18,7 +18,7 @@ import io.github.yesalam.bhopalbrts.Interface.ShowInfoListener;
 import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.adapter.RouteDetailAdapter;
 import io.github.yesalam.bhopalbrts.datamodel.Stop;
-import io.github.yesalam.bhopalbrts.util.AssetDatabaseHelper;
+import io.github.yesalam.bhopalbrts.data.AssetDatabaseHelper;
 
 import java.util.ArrayList;
 

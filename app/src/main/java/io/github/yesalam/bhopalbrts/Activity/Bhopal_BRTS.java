@@ -9,13 +9,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.adapter.TabPagerAdapter;
-import io.github.yesalam.bhopalbrts.util.DataBaseHelper;
 
 public class Bhopal_BRTS extends AppCompatActivity {
 
@@ -24,34 +21,16 @@ public class Bhopal_BRTS extends AppCompatActivity {
     private final String TAB_ID = "tab_id" ;
     ViewPager viewPager ;
     TabPagerAdapter tabPagerAdapter;
-    //DataBaseHelper dbhelper ;
+
     TabLayout tabLayout;
-    //public static SharedPreferences setting;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bhopal_brts);
-        //setting = getSharedPreferences(PREFERENCE_NAME,0);
-        //Reason of the very first bug of my this software.
-        //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        //dbhelper = DataBaseHelper.getInstance(this);
 
-       /* try {
-
-            dbhelper.createDataBase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-        /*try{
-
-            dbhelper.openDataBase();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
 
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -68,12 +47,7 @@ public class Bhopal_BRTS extends AppCompatActivity {
 
         tabLayout.setupWithViewPager(viewPager);
 
-       /* int tab_id = setting.getInt(TAB_ID,0);
-        if(tab_id == 0){
-            //let it be calling for first time
-        } else {
-            viewPager.setCurrentItem(tab_id-1);
-        }*/
+
 
 
 
@@ -122,35 +96,26 @@ public class Bhopal_BRTS extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-       /* try {
-            dbhelper.openDataBase();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
+
     }
 
-    public DataBaseHelper getDbhelper(){
-        //return dbhelper ;
-        return null ;
-    }
+
 
     @Override
     protected void onStop() {
         super.onStop();
-        //dbhelper.close();
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //dbhelper.close();
+
     }
 
     @Override
     public void finish() {
         Log.e(LOG_TAG, "Finish called");
-        //setting.edit().putInt(TAB_ID,1).commit();
-        //dbhelper.close();
         super.finish();
     }
 }

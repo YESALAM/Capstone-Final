@@ -1,8 +1,7 @@
-package io.github.yesalam.bhopalbrts.util;
+package io.github.yesalam.bhopalbrts.data;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;

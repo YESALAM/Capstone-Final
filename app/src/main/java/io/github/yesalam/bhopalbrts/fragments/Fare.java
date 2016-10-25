@@ -30,7 +30,7 @@ import android.widget.Toast;
 import io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS;
 import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.Activity.SelectStopActivity;
-import io.github.yesalam.bhopalbrts.util.AssetDatabaseHelper;
+import io.github.yesalam.bhopalbrts.data.AssetDatabaseHelper;
 import io.github.yesalam.bhopalbrts.util.Calculator;
 
 /**

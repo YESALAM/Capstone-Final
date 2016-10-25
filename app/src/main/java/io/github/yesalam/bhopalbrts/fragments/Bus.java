@@ -36,7 +36,7 @@ import io.github.yesalam.bhopalbrts.Activity.RouteDetailActivity;
 import io.github.yesalam.bhopalbrts.Activity.SelectStopActivity;
 import io.github.yesalam.bhopalbrts.adapter.CardAdapter;
 import io.github.yesalam.bhopalbrts.datamodel.CardData;
-import io.github.yesalam.bhopalbrts.util.AssetDatabaseHelper;
+import io.github.yesalam.bhopalbrts.data.AssetDatabaseHelper;
 import io.github.yesalam.bhopalbrts.util.Calculator;
 
 import java.util.List;
