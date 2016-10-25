@@ -15,11 +15,11 @@ import java.util.List;
  */
 public class AssetDatabaseHelper extends SQLiteAssetHelper {
     private static final String DB_NAME = "brtsM.db" ;
-    private static final int DB_VERSION = 1 ;
+    private static final int DB_VERSION = 2 ;
     public static AssetDatabaseHelper insatance = null ;
 
     private AssetDatabaseHelper(Context context) {
-        super(context,"brtsM.db", null,1 );
+        super(context,DB_NAME, null,DB_VERSION );
     }
 
     public static AssetDatabaseHelper getDatabaseHelper(Context context){
