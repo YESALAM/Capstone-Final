@@ -1,5 +1,6 @@
 package io.github.yesalam.bhopalbrts.data;
 
+import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
@@ -9,15 +10,19 @@ import android.provider.BaseColumns;
 
 public class BusDataContract {
 
-    public static final String CONTENT_AUTHORITY = "io.github.yesalam.bhopalbrts.app" ;
+    public static final String CONTENT_AUTHORITY = "io.github.yesalam.bhopalbrts" ;
 
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://"+CONTENT_AUTHORITY) ;
 
-    public static final String PATH_ALL = "stop" ;
+    public static final String PATH_ALL_STOP = "stop" ;
 
     public static final String PATH_ROUTE = "route" ;
 
     public static final class STOPS implements BaseColumns {
+
+        public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE+ "/" +CONTENT_AUTHORITY+"/" +PATH_ALL_STOP ;
+
+        public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE+ "/" +CONTENT_AUTHORITY+"/" +PATH_ALL_STOP ;
 
        public static final String TABLE_NAME = "allstops" ;
 
@@ -36,6 +41,12 @@ public class BusDataContract {
     }
 
     public static final class ROUTE implements BaseColumns{
+
+        public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE+ "/" +CONTENT_AUTHORITY+"/" +PATH_ROUTE ;
+
+        public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE+ "/" +CONTENT_AUTHORITY+"/" +PATH_ROUTE ;
+
+
         public static final String[] TABLE_NAME = {"SR1","SR2","SR3","SR4","SR5","SR6","SR7","SR8","TR1","TR2","TR3","TR4","TR4A","TR4AC"} ;
 
         public static final String COLUMN_STOPNAME = "stop_name" ;

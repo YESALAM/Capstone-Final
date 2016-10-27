@@ -129,7 +129,7 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        cursor = dbHelper.query(s, true);
+
         cursor = dbHelper.query(s);
         adapter.swapCursor(cursor);
 

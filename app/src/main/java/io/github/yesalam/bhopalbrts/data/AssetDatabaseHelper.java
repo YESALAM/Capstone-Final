@@ -18,7 +18,7 @@ public class AssetDatabaseHelper extends SQLiteAssetHelper {
     private static final int DB_VERSION = 2 ;
     public static AssetDatabaseHelper insatance = null ;
 
-    private AssetDatabaseHelper(Context context) {
+    public AssetDatabaseHelper(Context context) {
         super(context,DB_NAME, null,DB_VERSION );
     }
 
@@ -49,6 +49,8 @@ public class AssetDatabaseHelper extends SQLiteAssetHelper {
         return  result ;
     }
 
+
+    //TODO we could remove this .
     public Cursor getAllStops(CharSequence constrain){
         String sql = "select _id,stop,vicinity from allstops where stop like '"+constrain+"%'" ;
 
@@ -63,10 +65,6 @@ public class AssetDatabaseHelper extends SQLiteAssetHelper {
         return  builder.query(getReadableDatabase(), projectionin, selection, null, null, null, null);
     }
 
-    public Cursor query(CharSequence constrain,boolean b){
-        String sql = "select _id,stop , vicinity from allstops where stop like '"+constrain+"%' union all select _id,stop ,vicinity from allstops where vicinity like '%"+constrain+"%'";
-        return getReadableDatabase().rawQuery(sql, null);
-    }
 
 
 

@@ -290,25 +290,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
     }
 
 
-    public static int setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            // pre-condition
-            return 0;
-        }
 
-        int totalHeight = 0;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
-        }
-
-        totalHeight = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-
-        return totalHeight ;
-
-    }
 
 
 
