@@ -4,6 +4,7 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
@@ -19,7 +20,7 @@ public class DataProvider extends ContentProvider {
     static final int BUSES_WITH_STOP = 101 ;
     static final int ALL_FROM_ALLSTOP = 100 ;
     static final int STOPS_WITH_QUERY = 102 ;
-    //static final int STOPS_AND_VICINITY_WITH_QUERY = 103 ;
+    static final int STOPS_AND_VICINITY_WITH_QUERY = 103 ;
 
     static final int JUNCTION_FROM_ROUTE = 200 ;
     static final int ID_WITH_STOP_NAME = 201 ;
@@ -35,12 +36,11 @@ public class DataProvider extends ContentProvider {
         matcher.addURI(authority,BusDataContract.PATH_ALL_STOP,ALL_FROM_ALLSTOP);
         matcher.addURI(authority,BusDataContract.PATH_ALL_STOP+"/buses/",BUSES_WITH_STOP);
         matcher.addURI(authority,BusDataContract.PATH_ALL_STOP+"/*",STOPS_WITH_QUERY);
-        //matcher.addURI(authority,BusDataContract.PATH_ALL_STOP+"/vicinity/*",STOPS_AND_VICINITY_WITH_QUERY);
+        matcher.addURI(authority,BusDataContract.PATH_ALL_STOP+"/vicinity/*",STOPS_AND_VICINITY_WITH_QUERY);
 
         matcher.addURI(authority,BusDataContract.PATH_ROUTE+"/*",JUNCTION_FROM_ROUTE);
         matcher.addURI(authority,BusDataContract.PATH_ROUTE+"/*/*",ID_WITH_STOP_NAME);
-        matcher.addURI(authority,BusDataContract.PATH_ROUTE+"/*/#/#", ALL_BW_IDS);
-        //matcher.addURI(authority,BusDataContract.PATH_ROUTE+"/*/all/#/#",ALL_WITH_IDS);
+        matcher.addURI(authority,BusDataContract.PATH_ROUTE+"/*/*/*", ALL_BW_IDS);
 
         return matcher ;
 
@@ -71,6 +71,7 @@ public class DataProvider extends ContentProvider {
                 );
                 break;
             case BUSES_WITH_STOP :
+
                 retCursor = databaseHelper.getReadableDatabase().query(
                         BusDataContract.STOPS.TABLE_NAME,
                         projection,
@@ -90,9 +91,17 @@ public class DataProvider extends ContentProvider {
                         null,
                         null,
                         null
-                ) ;
+                );
+                /*String constrain = uri.getLastPathSegment() ;
+                String sql = "select _id,stop from allstops where stop like '"+constrain+"%' or stop like '%"+constrain+"%'" ;
+                retCursor = databaseHelper.getReadableDatabase().rawQuery(sql,null) ;*/
                 break;
-            /*case STOPS_AND_VICINITY_WITH_QUERY :
+           /* case STOPS_AND_VICINITY_WITH_QUERY :
+                String constrain = uri.getLastPathSegment() ;
+                String[] projectionin = {"_id","stop","vicinity"};
+                selection = "stop like "+"'"+constrain+"%'"+" or stop like '%"+constrain+"%'"+"or vicinity like "+"'%"+constrain+"%'";
+                SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
+                builder.setTables("allstops");
                 break;*/
             case JUNCTION_FROM_ROUTE :
                 String route_name = uri.getLastPathSegment() ;

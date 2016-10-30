@@ -72,6 +72,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS" />
         </activity>
+        <provider
+            android:authorities="@string/content_authority"
+            android:name=".data.DataProvider"
+            android:exported="false"
+            android:syncable="true"
+            />
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />

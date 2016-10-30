@@ -19,6 +19,7 @@ public class BusDataContract {
     public static final String PATH_ROUTE = "route" ;
 
     public static final class STOPS implements BaseColumns {
+        public static final Uri BASE_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_ALL_STOP).build() ;
 
         public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE+ "/" +CONTENT_AUTHORITY+"/" +PATH_ALL_STOP ;
 
@@ -38,9 +39,20 @@ public class BusDataContract {
 
         public static final String COLUMN_VICINITY = "vicinity" ;
 
+        public static final Uri BUSES_WITH_STOP = BASE_URI.buildUpon().appendPath("buses").build() ;
+
+
+
+        public static Uri buildStopqueryUri(String query){
+            return  BASE_URI.buildUpon().appendPath(query).build() ;
+        }
+
+
     }
 
     public static final class ROUTE implements BaseColumns{
+
+        public static final Uri BASE_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_ROUTE).build() ;
 
         public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE+ "/" +CONTENT_AUTHORITY+"/" +PATH_ROUTE ;
 
@@ -58,6 +70,18 @@ public class BusDataContract {
         public static final String COLUMN_DIST =  "dist" ;
 
         public static final String COLUMN_ISJUNCTION = "isjunction" ;
+
+        public static Uri buildJuctionRouteUri(String route){
+            return BASE_URI.buildUpon().appendPath(route).build() ;
+        }
+
+        public static Uri buildIdStopnameUri(String stopName,String route){
+            return BASE_URI.buildUpon().appendPath(stopName).appendPath(route).build() ;
+        }
+
+        public static Uri buildAllbwIdUri(String route,int startId,int stopId){
+            return BASE_URI.buildUpon().appendPath(""+stopId).appendPath(""+startId).appendPath(route).build() ;
+        }
 
     }
 

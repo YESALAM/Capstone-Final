@@ -31,6 +31,7 @@ import io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS;
 import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.Activity.SelectStopActivity;
 import io.github.yesalam.bhopalbrts.data.AssetDatabaseHelper;
+import io.github.yesalam.bhopalbrts.data.BusDataContract;
 import io.github.yesalam.bhopalbrts.util.Calculator;
 
 /**
@@ -123,8 +124,11 @@ public class Fare extends Fragment implements View.OnClickListener {
                 if(constraint!=null){
                     int count = constraint.length();
                     if(count>=3){
-                        String constrains = constraint.toString();
-                        cursor = dbHelper.getStops(constrains);
+                        String query = constraint.toString();
+                        String[] projection = {BusDataContract.STOPS._ID,BusDataContract.STOPS.COLUMN_STOP} ;
+                        String selection = "stop like '"+query+"%' or stop like '%"+query+"%'" ;
+                        cursor = getContext().getContentResolver().query(BusDataContract.STOPS.buildStopqueryUri(query),projection,selection,null,null);
+                        //cursor = dbHelper.getStops(constrains);
                     }
                 }
                 return cursor;
@@ -207,7 +211,7 @@ public class Fare extends Fragment implements View.OnClickListener {
                 //Chech the validity of input strings .
                 if(isInputValid(from,to))
                 {
-                    Calculator calci = new Calculator(from,to, dbHelper);
+                    Calculator calci = new Calculator(from,to, getContext());
                     calci.calc();
                     String fare =  calci.getFare()+"" ;
                     String via = calci.getRoute();

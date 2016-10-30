@@ -4,10 +4,15 @@ package io.github.yesalam.bhopalbrts.util;
  * Created by yesalam on 20-08-2015.
  */
 
+import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import io.github.yesalam.bhopalbrts.data.AssetDatabaseHelper;
+import io.github.yesalam.bhopalbrts.data.BusDataContract;
 import io.github.yesalam.bhopalbrts.datamodel.CardData;
+import io.github.yesalam.bhopalbrts.datamodel.Stop;
+import io.github.yesalam.bhopalbrts.fragments.Bus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,12 +31,13 @@ public class Calculator {
     AssetDatabaseHelper dataBaseHelper;
     private float fare = 0 ;
     private String route = null ;
+    private Context context ;
 
 
-    public Calculator(String origin,String destination,AssetDatabaseHelper dataBaseHelper){
+    public Calculator(String origin,String destination,Context context){
         this.origin = origin;
         this.destination = destination;
-        this.dataBaseHelper = dataBaseHelper ;
+        this.context = context ;
     }
 
     /**
@@ -40,10 +46,23 @@ public class Calculator {
      * @return list of CardData set .
      */
     public List<CardData> calc(){
-        String[] buses_at_origin = dataBaseHelper.getBuses(origin).split("-");
-        String[] buses_at_destination = dataBaseHelper.getBuses(destination).split("-");
+        String[] projection = {"buses"} ;
+        String selection = "stop == ?" ;
+        Cursor tempCursor = context.getContentResolver().query(BusDataContract.STOPS.BUSES_WITH_STOP,projection,selection,new String[]{origin},null) ;
+        tempCursor.moveToFirst() ;
+        String temp1 = tempCursor.getString(0) ;
+        String[] buses_at_origin = temp1.split("-");           //dataBaseHelper.getBuses(origin).split("-");
+        Cursor tempCursor2 = context.getContentResolver().query(BusDataContract.STOPS.BUSES_WITH_STOP,projection,selection,new String[]{destination},null) ;
+        tempCursor2.moveToFirst() ;
+        String temp2 = tempCursor2.getString(0) ;
+        String[] buses_at_destination = temp2.split("-") ;            //dataBaseHelper.getBuses(destination).split("-");
+        tempCursor.close();
+        tempCursor2.close();
         List<String> direct_buses = new ArrayList();
 
+
+        Log.e(LOG_TAG,temp1) ;
+        Log.e(LOG_TAG,temp2) ;
         //Check if there is any bus that go to both the places .
         //add them all to direct_buses list .
         for(int i=0;i<buses_at_origin.length;i++){
@@ -59,7 +78,7 @@ public class Calculator {
             CardData[] cardData = new CardData[direct_buses.size()];
 
             for(int i=0;i<direct_buses.size();i++){
-                float int_distance = dataBaseHelper.getDistance(origin, destination, direct_buses.get(i));
+                float int_distance = getDistance(origin, destination, direct_buses.get(i));
                 float distance = Util.twoDigitPrecision(int_distance);
                 String bus = direct_buses.get(i);
                 if(bus.equalsIgnoreCase("TR4AC")){
@@ -87,16 +106,16 @@ public class Calculator {
             ArrayList<CardData> list_of_cardData = new ArrayList<CardData>();
 
             for (String bus_at_origin : buses_at_origin) {
-                List junctionList_of_bus_at_origin = dataBaseHelper.getJunctionList(bus_at_origin);
+                List junctionList_of_bus_at_origin = getJunctionList(bus_at_origin);
                 for (String bus_at_destination : buses_at_destination) {
-                    List junctionList_of_bus_at_destination = dataBaseHelper.getJunctionList(bus_at_destination);
+                    List junctionList_of_bus_at_destination = getJunctionList(bus_at_destination);
                     List<String> list_of_common_Junction = commonJunction(junctionList_of_bus_at_origin, junctionList_of_bus_at_destination);
                     if (list_of_common_Junction.size() == 1) {
                         // THINGS ARE RIGHT Only one Junction is found
                         String junction = list_of_common_Junction.get(0);
                         Log.e(LOG_TAG, junction);
                         String connected_buses = bus_at_origin + " + " + bus_at_destination;
-                        float integer_distance_junction = dataBaseHelper.getDistance(origin, junction, bus_at_origin);
+                        float integer_distance_junction = getDistance( origin, junction, bus_at_origin);
                         float distance_of_juntion = Util.twoDigitPrecision(integer_distance_junction);
                         int fare_till_junction ;
                         if(bus_at_origin.equalsIgnoreCase("TR4AC")){
@@ -105,7 +124,7 @@ public class Calculator {
                             fare_till_junction = calcFare(distance_of_juntion);
                         }
 
-                        float integer_distance_destination = dataBaseHelper.getDistance(junction, destination, bus_at_destination);
+                        float integer_distance_destination = getDistance(junction, destination, bus_at_destination);
                         float distance_of_destination =Util.twoDigitPrecision(integer_distance_destination);
                         int fare_till_destination ;
                         if(bus_at_destination.equalsIgnoreCase("TR4AC")){
@@ -126,7 +145,7 @@ public class Calculator {
                         String junction = getNearestJunction(list_of_common_Junction, origin, bus_at_origin);
                         Log.e(LOG_TAG, junction);
                         String connected_buses = bus_at_origin + " + " + bus_at_destination;
-                        float integer_distance_junction = dataBaseHelper.getDistance(origin, junction, bus_at_origin);
+                        float integer_distance_junction = getDistance(origin, junction, bus_at_origin);
                         float distance_of_juntion = Util.twoDigitPrecision(integer_distance_junction);
                         int fare_till_junction ;
                         if(bus_at_origin.equalsIgnoreCase("TR4AC")){
@@ -135,7 +154,7 @@ public class Calculator {
                             fare_till_junction = calcFare(distance_of_juntion);
                         }
 
-                        float integer_distance_destination = dataBaseHelper.getDistance(junction, destination, bus_at_destination);
+                        float integer_distance_destination = getDistance(junction, destination, bus_at_destination);
                         float distance_of_destination =Util.twoDigitPrecision(integer_distance_destination);
                         int fare_till_destination ;
                         if(bus_at_destination.equalsIgnoreCase("TR4AC")){
@@ -210,7 +229,7 @@ public class Calculator {
         String result = null ;
         //get the distance of all the junction from origin.
         for(int i=0;i<junctions.size();i++){
-            dist[i] = dataBaseHelper.getDistance(origin,junctions.get(i),bus);
+            dist[i] = getDistance(origin,junctions.get(i),bus);
         }
         //store the distance in new array so that we can later get
         //the junction string from the index of above array.
@@ -294,4 +313,134 @@ public class Calculator {
         }
         return 0;
     }
+
+    private float getDistance(String from,String to,String route){
+        float dist = 0;
+        int startId = getId(from, route);
+        int stopId = getId(to,route);
+
+        if(startId>stopId){
+            int temp = startId;
+            startId= stopId;
+            stopId = temp;
+        }
+        //Log.e("Database",from+"  "+to+"  "+bus);
+        //String sql = "select dist from "+route+" where _id = "+fromid+" or _id = "+toid ;
+        String[] projection = {BusDataContract.ROUTE.COLUMN_DIST} ;
+        String selection = "_id =" + startId+" or _id = "+stopId ;
+        // Log.e("Database",sql);
+        //Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+        Cursor cursor = context.getContentResolver().query(BusDataContract.ROUTE.buildAllbwIdUri(route,startId,stopId),projection,selection,null,null) ;
+        cursor.moveToFirst();//TODO Check NullPointerException
+        float first_distant = cursor.getFloat(0);
+        cursor.moveToNext();
+        float second_distance = cursor.getFloat(0);
+        if(first_distant<second_distance){
+            dist = second_distance - first_distant ;
+        } else {
+            dist = first_distant - second_distance ;
+        }
+        cursor.close();
+        return dist;
+    }
+
+
+    private int getId(String stopName,String route){
+        String[] selectionarg = {stopName};
+        String selection =  " stop_name = ? " ;
+        String[] projection =  {BusDataContract.ROUTE._ID } ;
+        Cursor cursor = context.getContentResolver().query(BusDataContract.ROUTE.buildIdStopnameUri(stopName,route),projection,selection,selectionarg,null) ;
+        cursor.moveToFirst();//TODO Check NullPointerException
+        int result = cursor.getInt(0);
+        cursor.close();
+        return  result ;
+    }
+
+    public ArrayList<Stop> getRouteDetail(String bus){
+        ArrayList<Stop> result = new ArrayList<>() ;
+        int startid = getId(origin, bus);
+        int stopid = getId(destination,bus);
+        int temp = -1 ;
+        float pre = 0 ;
+        if(startid>stopid) {
+            temp = startid ;
+            startid = stopid ;
+            stopid = temp ;
+        }
+
+        String[] projection = {BusDataContract.ROUTE.COLUMN_STOPNAME,BusDataContract.ROUTE.COLUMN_LATITUDE,BusDataContract.ROUTE.COLUMN_LONGITUDE, BusDataContract.ROUTE.COLUMN_DIST} ;
+        String selection = " _id >= "+ startid + " and _id<= " + stopid ;
+
+        //Cursor cursor = getReadableDatabase().rawQuery("select stop_name,latitude,longitude,dist from " + bus + " where _id >=" + startid + " and _id<= " + stopid, null) ;
+        Cursor cursor = context.getContentResolver().query(BusDataContract.ROUTE.buildAllbwIdUri(route,startid,stopid),projection,selection,null,null) ;
+        if(temp != -1) {
+            //id has been swaped ;
+            cursor.moveToLast();
+            do {
+                //get vicinity
+
+                Stop stop = new Stop();
+                stop.setStop(cursor.getString(0));
+                stop.setLattitude(Double.parseDouble(cursor.getString(2)));
+                stop.setLongitude(Double.parseDouble(cursor.getString(1)));
+                float dist = cursor.getFloat(3);
+
+                //float floatdist = Util.twoDigitPrecision(dist);
+                //conversion complete
+                //TODO chane equation after database updation .
+
+                if(pre == 0)  {
+                    stop.setDist(0);
+                    pre = dist ;
+                } else {
+                    stop.setDist(pre-dist);
+                }
+                result.add(stop);
+
+
+
+
+            } while(cursor.moveToPrevious()) ;
+        } else {
+
+            temp = 0 ;
+            while (cursor.moveToNext()) {
+                Stop stop = new Stop();
+                stop.setStop(cursor.getString(0));
+                stop.setLattitude(Double.parseDouble((cursor.getString(2))));
+                stop.setLongitude(Double.parseDouble(cursor.getString(1)));
+                float dist = cursor.getFloat(3);
+
+                if(temp == 0){
+                    temp = 1 ;
+                    stop.setDist(0);
+                    pre = dist ;
+                } else {
+                    stop.setDist(dist-pre);
+                }//TODO chane equation after database updation .
+
+                result.add(stop);
+
+            }
+        }
+        cursor.close();
+        return  result ;
+    }
+
+    private List getJunctionList(String route){
+        List result = new ArrayList<String>();
+        String[] projection = {BusDataContract.ROUTE.COLUMN_STOPNAME} ;
+        String selection = "isJunction = 1 " ;
+
+        Cursor cursor = context.getContentResolver().query(BusDataContract.ROUTE.buildJuctionRouteUri(route),projection,selection,null,null) ;
+        //Cursor cursor = getReadableDatabase().rawQuery("select stop_name from " + bustable + " where isJunction = 1", null);
+
+        while(cursor.moveToNext()){
+            result.add(cursor.getString(0));
+        }
+        cursor.close();
+        return result;
+
+    }
+
 }

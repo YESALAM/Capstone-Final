@@ -30,6 +30,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import io.github.yesalam.bhopalbrts.R;
+import io.github.yesalam.bhopalbrts.data.BusDataContract;
 import io.github.yesalam.bhopalbrts.datamodel.Stop;
 import io.github.yesalam.bhopalbrts.data.AssetDatabaseHelper;
 
@@ -47,7 +48,7 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
     ListView listView;
     SimpleCursorAdapter adapter;
     Cursor cursor;
-    AssetDatabaseHelper dbHelper;
+    //AssetDatabaseHelper dbHelper;
     ImageView gpsbutton ;
     LocationManager manager ;
     ArrayList<Stop> dataset;
@@ -86,8 +87,13 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
 
         String[] from = {"stop","vicinity"};
         int[] to ={android.R.id.text1,android.R.id.text2};
-        dbHelper = AssetDatabaseHelper.getDatabaseHelper(this);
-        cursor = dbHelper.getAllStops("");
+        //dbHelper = AssetDatabaseHelper.getDatabaseHelper(this);
+        //String sql = "select _id,stop,vicinity from allstops where stop like '"+constrain+"%'" ;
+        String[] projectionn = {BusDataContract.STOPS._ID,BusDataContract.STOPS.COLUMN_STOP,BusDataContract.STOPS.COLUMN_VICINITY} ;
+        String selection = "stop like ?" ;
+        String[] selectionArgs = {""} ;
+        cursor = getContentResolver().query(BusDataContract.STOPS.buildStopqueryUri(""),projectionn,selection,selectionArgs,null) ;
+        //cursor = dbHelper.getAllStops("");
 
         adapter = new SimpleCursorAdapter(this,android.R.layout.simple_list_item_2,cursor,from,to);
 
@@ -130,7 +136,10 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-        cursor = dbHelper.query(s);
+        //cursor = dbHelper.query(s);
+        String[] projectionin = {"_id","stop","vicinity"};
+        String selection = "stop like "+"'"+s+"%'"+" or stop like '%"+s+"%'"+"or vicinity like "+"'%"+s+"%'";
+        cursor = getContentResolver().query(BusDataContract.STOPS.buildStopqueryUri(s.toString()),projectionin,selection,null,null) ;
         adapter.swapCursor(cursor);
 
     }
@@ -226,7 +235,8 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
 
     public void getNearestStopList(double currentLatitude,double currentLongitude)  {
         dataset = new ArrayList<>();
-        Cursor cursor1 = dbHelper.getMain();
+        //Cursor cursor1 = dbHelper.getMain();
+        Cursor cursor1 = getContentResolver().query(BusDataContract.STOPS.BASE_URI,null,null,null,null) ;
         while (cursor1.moveToNext()){
             Log.i(LOG_TAG,"Into while");
             float[] result = new float[1];

@@ -15,6 +15,7 @@ import io.github.yesalam.bhopalbrts.adapter.RouteActivityPagerAdapter;
 import io.github.yesalam.bhopalbrts.datamodel.Stop;
 import io.github.yesalam.bhopalbrts.fragments.RouteMap;
 import io.github.yesalam.bhopalbrts.data.AssetDatabaseHelper;
+import io.github.yesalam.bhopalbrts.util.Calculator;
 
 import java.util.ArrayList;
 
@@ -102,17 +103,22 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+
+
         if( junction == null ) {
             Log.i(LOG_TAG, "Junction is null");
-            stoplist = dbHelper.getRoute(bus,from,to) ;
+            Calculator calculator = new Calculator(from,to,getApplicationContext()) ;
+            stoplist = calculator.getRouteDetail(bus) ;
 
         } else {
             Log.i(LOG_TAG,junction) ;
 
             String[] buses = bus.split("\\+");
             ArrayList<Stop>[] lists = new ArrayList[buses.length] ;
+            Calculator calculator = new Calculator(from,junction,getApplicationContext()) ;
             for(int i=0 ;i<buses.length;i++){
-                lists[i] = dbHelper.getRoute(buses[i],from,junction);
+                lists[i] = calculator.getRouteDetail(buses[i]);
                 Log.i(LOG_TAG,i+" times runned");
                 from = junction ;
                 junction = to ;

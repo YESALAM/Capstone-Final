@@ -35,6 +35,7 @@ import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.Activity.RouteDetailActivity;
 import io.github.yesalam.bhopalbrts.Activity.SelectStopActivity;
 import io.github.yesalam.bhopalbrts.adapter.CardAdapter;
+import io.github.yesalam.bhopalbrts.data.BusDataContract;
 import io.github.yesalam.bhopalbrts.datamodel.CardData;
 import io.github.yesalam.bhopalbrts.data.AssetDatabaseHelper;
 import io.github.yesalam.bhopalbrts.util.Calculator;
@@ -123,9 +124,12 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
                 if (constraint != null) {
                     int count = constraint.length();
                     if (count >= 3) {
-                        String constrains = constraint.toString();
+                        String query = constraint.toString();
 
-                        cursor = dbHelper.getStops(constrains);
+                        //cursor = dbHelper.getStops(constrains);
+                        String[] projection = {BusDataContract.STOPS._ID,BusDataContract.STOPS.COLUMN_STOP} ;
+                        String selection = "stop like '"+query+"%' or stop like '%"+query+"%'" ;
+                        cursor = getContext().getContentResolver().query(BusDataContract.STOPS.buildStopqueryUri(query),projection,selection,null,null);
                     }
                 }
                 return cursor;
@@ -249,7 +253,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
      *
      */
     private void searchHandler(String from , String to) {
-        dataset = new Calculator(from,to, dbHelper).calc() ;
+        dataset = new Calculator(from,to, getContext()).calc() ;
         cadapter = new CardAdapter(getActivity(),dataset);
 
 

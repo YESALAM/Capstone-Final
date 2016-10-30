@@ -87,5 +87,6 @@
         </p>
     ]]></string>
     <string name="title_activity_maps">Map</string>
+    <string name="content_authority">io.github.yesalam.bhopalbrts</string>
 
 </resources>
