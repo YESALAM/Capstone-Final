@@ -58,7 +58,7 @@ public class Fare extends Fragment implements View.OnClickListener {
     //DataBaseHelper dbManager;
     SimpleCursorAdapter adapter;
 
-    AssetDatabaseHelper dbHelper ;
+   // AssetDatabaseHelper dbHelper ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -98,7 +98,7 @@ public class Fare extends Fragment implements View.OnClickListener {
         farerupee.setText("`");
 
 
-        dbHelper = AssetDatabaseHelper.getDatabaseHelper(activity);
+        //dbHelper = AssetDatabaseHelper.getDatabaseHelper(activity);
 
         String[] from = {"stop"};
         int[] to = {android.R.id.text1};

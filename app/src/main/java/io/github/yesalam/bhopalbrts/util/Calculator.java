@@ -28,7 +28,7 @@ public class Calculator {
     private final String LOG_TAG = Calculator.class.getSimpleName();
     private String origin;
     private String destination;
-    AssetDatabaseHelper dataBaseHelper;
+    //AssetDatabaseHelper dataBaseHelper;
     private float fare = 0 ;
     private String route = null ;
     private Context context ;

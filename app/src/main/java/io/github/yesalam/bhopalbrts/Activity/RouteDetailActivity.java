@@ -24,7 +24,7 @@ import java.util.ArrayList;
  */
 public class RouteDetailActivity extends AppCompatActivity implements ShowInfoListener {
     private final String LOG_TAG = RouteDetailActivity.class.getSimpleName();
-    AssetDatabaseHelper dbHelper;
+   // AssetDatabaseHelper dbHelper;
     static ArrayList<Stop> stoplist ;
     ViewPager viewPager;
     RouteActivityPagerAdapter pagerAdapter ;
@@ -91,7 +91,7 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
      *
      */
     private void initialize(){
-        dbHelper =  AssetDatabaseHelper.getDatabaseHelper(this);
+       // dbHelper =  AssetDatabaseHelper.getDatabaseHelper(this);
 
         Intent intent = getIntent() ;
         String from = intent.getStringExtra("ORIGIN") ;

@@ -16,18 +16,13 @@ import java.util.List;
 public class AssetDatabaseHelper extends SQLiteAssetHelper {
     private static final String DB_NAME = "brtsM.db" ;
     private static final int DB_VERSION = 2 ;
-    public static AssetDatabaseHelper insatance = null ;
+    //public static AssetDatabaseHelper insatance = null ;
 
     public AssetDatabaseHelper(Context context) {
         super(context,DB_NAME, null,DB_VERSION );
     }
 
-    public static AssetDatabaseHelper getDatabaseHelper(Context context){
-        if(insatance == null ){
-            insatance = new AssetDatabaseHelper(context);
-        }
-        return insatance ;
-    }
+
 
     public String getBuses(String stop){
         String sql = "select buses from allstops where stop =='"+stop+"'" ;

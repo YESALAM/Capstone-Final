@@ -70,7 +70,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
     SimpleCursorAdapter adapter;
     List<CardData> dataset ;
 
-    AssetDatabaseHelper dbHelper ;
+    //AssetDatabaseHelper dbHelper ;
 
     @Override
     public void onAttach(Activity activity) {
@@ -96,7 +96,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
 
 
 
-        dbHelper = AssetDatabaseHelper.getDatabaseHelper(activity);
+        //dbHelper = AssetDatabaseHelper.getDatabaseHelper(activity);
 
         String[] from = {"stop"};
         int[] to = {android.R.id.text1};

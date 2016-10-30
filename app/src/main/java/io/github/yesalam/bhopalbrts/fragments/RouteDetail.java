@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class RouteDetail extends Fragment implements AdapterView.OnItemClickListener {
     private final String LOG_TAG = RouteDetail.class.getSimpleName() ;
     ListView listView ;
-    AssetDatabaseHelper dbHelper;
+    //AssetDatabaseHelper dbHelper;
     ArrayList<Stop> stopList ;
     ShowInfoListener showInfoListener;
     View footerview;
