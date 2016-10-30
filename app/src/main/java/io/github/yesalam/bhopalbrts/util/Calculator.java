@@ -372,7 +372,7 @@ public class Calculator {
         String selection = " _id >= "+ startid + " and _id<= " + stopid ;
 
         //Cursor cursor = getReadableDatabase().rawQuery("select stop_name,latitude,longitude,dist from " + bus + " where _id >=" + startid + " and _id<= " + stopid, null) ;
-        Cursor cursor = context.getContentResolver().query(BusDataContract.ROUTE.buildAllbwIdUri(route,startid,stopid),projection,selection,null,null) ;
+        Cursor cursor = context.getContentResolver().query(BusDataContract.ROUTE.buildAllbwIdUri(bus,startid,stopid),projection,selection,null,null) ;
         if(temp != -1) {
             //id has been swaped ;
             cursor.moveToLast();
