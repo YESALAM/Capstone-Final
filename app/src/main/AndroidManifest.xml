@@ -64,6 +64,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS" />
+
         </activity>
         <activity
             android:name=".Activity.AboutDevloper"

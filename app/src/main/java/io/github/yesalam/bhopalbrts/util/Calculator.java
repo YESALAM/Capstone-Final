@@ -61,8 +61,7 @@ public class Calculator {
         List<String> direct_buses = new ArrayList();
 
 
-        Log.e(LOG_TAG,temp1) ;
-        Log.e(LOG_TAG,temp2) ;
+
         //Check if there is any bus that go to both the places .
         //add them all to direct_buses list .
         for(int i=0;i<buses_at_origin.length;i++){
@@ -316,8 +315,8 @@ public class Calculator {
 
     private float getDistance(String from,String to,String route){
         float dist = 0;
-        int startId = getId(from, route);
-        int stopId = getId(to,route);
+        int startId = getId(context,from, route);
+        int stopId = getId(context,to,route);
 
         if(startId>stopId){
             int temp = startId;
@@ -345,7 +344,7 @@ public class Calculator {
     }
 
 
-    private int getId(String stopName,String route){
+    public static int getId(Context context,String stopName,String route){
         String[] selectionarg = {stopName};
         String selection =  " stop_name = ? " ;
         String[] projection =  {BusDataContract.ROUTE._ID } ;
@@ -356,7 +355,7 @@ public class Calculator {
         return  result ;
     }
 
-    public ArrayList<Stop> getRouteDetail(String bus){
+   /* public ArrayList<Stop> getRouteDetail(String bus){
         ArrayList<Stop> result = new ArrayList<>() ;
         int startid = getId(origin, bus);
         int stopid = getId(destination,bus);
@@ -425,7 +424,7 @@ public class Calculator {
         }
         cursor.close();
         return  result ;
-    }
+    }*/
 
     private List getJunctionList(String route){
         List result = new ArrayList<String>();

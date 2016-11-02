@@ -12,6 +12,9 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -38,12 +41,11 @@ import io.github.yesalam.bhopalbrts.util.Calculator;
  * This fragment is for minimum fare calculation between two stops . Stops
  * may be direct or via junctions.
  */
-public class Fare extends Fragment implements View.OnClickListener {
+public class Fare extends Fragment implements View.OnClickListener,TextWatcher {
 
     Bhopal_BRTS activity ;
 
     private final String LOG_TAG = Fare.class.getSimpleName() ;
-    SharedPreferences setting ;
 
     AutoCompleteTextView actvfrom;
     AutoCompleteTextView actvto ;
@@ -55,10 +57,11 @@ public class Fare extends Fragment implements View.OnClickListener {
     TextView fareamount;
     TextView farerupee;
     TextView viaholder;
-    //DataBaseHelper dbManager;
     SimpleCursorAdapter adapter;
+    String mCurFilter = null ;
 
-   // AssetDatabaseHelper dbHelper ;
+
+    static int flag = 0 ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,9 +71,6 @@ public class Fare extends Fragment implements View.OnClickListener {
     }
 
     public void onStart(){
-       //setting = activity.setting ;
-        //setting.edit().putInt("tab_id",3).commit();
-        Log.e("fare", "onStart called");
         super.onStart();
         initialize();
     }
@@ -97,9 +97,6 @@ public class Fare extends Fragment implements View.OnClickListener {
         farerupee.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/rupee.ttf"));
         farerupee.setText("`");
 
-
-        //dbHelper = AssetDatabaseHelper.getDatabaseHelper(activity);
-
         String[] from = {"stop"};
         int[] to = {android.R.id.text1};
 
@@ -116,6 +113,9 @@ public class Fare extends Fragment implements View.OnClickListener {
 
             }
         });
+
+
+
         adapter.setFilterQueryProvider(new FilterQueryProvider() {
             @Override
             public Cursor runQuery(CharSequence constraint) {
@@ -128,13 +128,15 @@ public class Fare extends Fragment implements View.OnClickListener {
                         String[] projection = {BusDataContract.STOPS._ID,BusDataContract.STOPS.COLUMN_STOP} ;
                         String selection = "stop like '"+query+"%' or stop like '%"+query+"%'" ;
                         cursor = getContext().getContentResolver().query(BusDataContract.STOPS.buildStopqueryUri(query),projection,selection,null,null);
-                        //cursor = dbHelper.getStops(constrains);
                     }
                 }
                 return cursor;
 
             }
         });
+
+
+
 
         actvfrom.setAdapter(adapter);
         actvto.setAdapter(adapter);
@@ -146,49 +148,9 @@ public class Fare extends Fragment implements View.OnClickListener {
         ivfrom.setOnClickListener(this);
         ivto.setOnClickListener(this);
 
-        actvfrom.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        actvfrom.addTextChangedListener(this);
+        actvto.addTextChangedListener(this);
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(start==0 ) {
-                    ivfrom.setVisibility(View.GONE);
-                } else {
-                    ivfrom.setVisibility(View.VISIBLE);
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        actvto.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(start==0 ) {
-                    ivto.setVisibility(View.GONE);
-                } else {
-                    ivto.setVisibility(View.VISIBLE);
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
     }
 
     @Override
@@ -279,4 +241,28 @@ public class Fare extends Fragment implements View.OnClickListener {
     }
 
 
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        if(flag==start+count+before) return ;
+        View view ;
+        if(actvfrom.isFocused()) view = ivfrom ;
+        else view = ivto ;
+        if(start==0 ) {
+            view.setVisibility(View.GONE);
+        } else {
+            view.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
 }

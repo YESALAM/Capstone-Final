@@ -49,7 +49,6 @@ import java.util.List;
 public class Bus extends Fragment implements View.OnClickListener ,AdapterView.OnItemClickListener {
 
     private final String LOG_TAG = Bus.class.getSimpleName() ;
-    Bhopal_BRTS activity ;
     SharedPreferences setting ;
 
     AutoCompleteTextView actvfrom;
@@ -75,7 +74,6 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.activity = (Bhopal_BRTS) activity ;
     }
 
     private void initialize(){
@@ -95,9 +93,6 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
         bus_motion = (ImageView) getView().findViewById(R.id.bus_motion_view);
 
 
-
-        //dbHelper = AssetDatabaseHelper.getDatabaseHelper(activity);
-
         String[] from = {"stop"};
         int[] to = {android.R.id.text1};
 
@@ -110,7 +105,6 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
                 } else {
                     final int colIndex = cursor.getColumnIndexOrThrow("stop");
                     String result = cursor.getString(colIndex);
-
                     return result;
                 }
 
@@ -126,7 +120,6 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
                     if (count >= 3) {
                         String query = constraint.toString();
 
-                        //cursor = dbHelper.getStops(constrains);
                         String[] projection = {BusDataContract.STOPS._ID,BusDataContract.STOPS.COLUMN_STOP} ;
                         String selection = "stop like '"+query+"%' or stop like '%"+query+"%'" ;
                         cursor = getContext().getContentResolver().query(BusDataContract.STOPS.buildStopqueryUri(query),projection,selection,null,null);
@@ -338,7 +331,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
     {
 
         DisplayMetrics dm = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics( dm );
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics( dm );
         TranslateAnimation anim  = new TranslateAnimation( 0, -dm.widthPixels, 0,  0);
         anim.setDuration(1000);
         anim.setFillAfter( true );
@@ -349,7 +342,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
     {
 
         DisplayMetrics dm = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics( dm );
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics( dm );
         TranslateAnimation anim = new TranslateAnimation( dm.widthPixels, 0 , 0,  0);
         anim.setDuration(2000);
         anim.setFillAfter( true );

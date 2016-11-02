@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
 
         android:layout_below="@id/sliding_tabs"
-        android:layout_above="@+id/adViewmain"
+
 
         />
     <!-- android:background="@drawable/green_at_ground_all"-->

@@ -18,10 +18,8 @@ public class Bhopal_BRTS extends AppCompatActivity {
 
     private final String LOG_TAG = Bhopal_BRTS.class.getSimpleName();
     private final String PREFERENCE_NAME = "apppreference" ;
-    private final String TAB_ID = "tab_id" ;
     ViewPager viewPager ;
     TabPagerAdapter tabPagerAdapter;
-
     TabLayout tabLayout;
 
 
@@ -31,12 +29,8 @@ public class Bhopal_BRTS extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bhopal_brts);
 
-
-
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-
-
 
 
         // Create the adapter that will return a fragment for each of the four
@@ -46,13 +40,6 @@ public class Bhopal_BRTS extends AppCompatActivity {
         viewPager.setAdapter(tabPagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
-
-
-
-
-
-
-
 
 
     }
@@ -115,7 +102,6 @@ public class Bhopal_BRTS extends AppCompatActivity {
 
     @Override
     public void finish() {
-        Log.e(LOG_TAG, "Finish called");
         super.finish();
     }
 }

@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 /**
  * Created by yesalam on 26/10/16.
@@ -137,6 +138,7 @@ public class DataProvider extends ContentProvider {
                         null,
                         null
                 );
+                Log.e("ContentProvider",retCursor.toString()) ;
                 break;
             /*case ALL_WITH_IDS :
                 break;*/

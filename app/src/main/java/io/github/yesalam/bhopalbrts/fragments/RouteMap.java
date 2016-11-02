@@ -1,8 +1,11 @@
 package io.github.yesalam.bhopalbrts.fragments;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -25,6 +28,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+
 import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.datamodel.Stop;
 
@@ -34,17 +38,17 @@ import java.util.ArrayList;
  * Created by yesalam on 22-08-2015.
  */
 public class RouteMap extends Fragment implements OnMapReadyCallback {
-    private final String LOG_TAG = RouteMap.class.getSimpleName() ;
+    private final String LOG_TAG = RouteMap.class.getSimpleName();
     //MapView mapView ;
-    SupportMapFragment supportMapFragment ;
+    SupportMapFragment supportMapFragment;
     GoogleMap map;
-    ArrayList<Stop> stoplist;
+    public ArrayList<Stop> stoplist;
     MarkerOptions[] optionses;
     PolylineOptions[] polylineOptionses;
-    Marker[] markers ;
+    Marker[] markers;
 
 
-    int junction_stop = 0 ;
+    int junction_stop = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,10 +56,15 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
         setHasOptionsMenu(true);
     }
 
-    public RouteMap(){}
-    public void setStoplist(ArrayList<Stop> stoplist){
-        this.stoplist = stoplist ;
+    public RouteMap() {
     }
+
+    public void setData(ArrayList<Stop> data){
+        this.stoplist = data ;
+        if(map!=null) setupMap();
+    }
+
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -65,24 +74,24 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onStart() {
-        Log.e(LOG_TAG,"onStart called");
+        Log.e(LOG_TAG, "onStart called");
         super.onStart();
-        if(map==null){
+        if (map == null) {
             //map = supportMapFragment.getMap();
-           // Log.e(LOG_TAG,map.toString());
+            // Log.e(LOG_TAG,map.toString());
             supportMapFragment.getMapAsync(this);
            /*if(map!=null){
                setupMap();
            }*/
         }
-        Log.e(LOG_TAG,"onStart finished");
+        Log.e(LOG_TAG, "onStart finished");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v ;
+        View v;
         //v = inflater.inflate(R.layout.fragment_route_map,container,false);
-        v = inflater.inflate(R.layout.fragment_route_map_legacy,container,false);
+        v = inflater.inflate(R.layout.fragment_route_map_legacy, container, false);
         // Gets the MapView from the XML layout and creates it
         //mapView = (MapView) v.findViewById(R.id.mapview);
         // mapView.onCreate(savedInstanceState);
@@ -100,56 +109,58 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
         FragmentManager fm = getChildFragmentManager();
         supportMapFragment = (SupportMapFragment) fm.findFragmentById(R.id.legacy_map_container);
         if (supportMapFragment == null) {
-            Log.e(LOG_TAG,"Didnt find fragment");
+            Log.e(LOG_TAG, "Didnt find fragment");
             supportMapFragment = SupportMapFragment.newInstance();
             fm.beginTransaction().replace(R.id.legacy_map_container, supportMapFragment).commit();
         }
-        Log.e(LOG_TAG,"onActivityCreated finished");
+        Log.e(LOG_TAG, "onActivityCreated finished");
     }
 
-    private void initializeMarker(){
+    private void initializeMarker() {
         optionses = new MarkerOptions[stoplist.size()];
-        markers = new Marker[stoplist.size()] ;
-        int i=0;
-        for(Stop stop:stoplist){
-            Log.e(stop.getStop(),stop.getLattitude()+" : "+ stop.getLongitude());
+        markers = new Marker[stoplist.size()];
+        int i = 0;
+        for (Stop stop : stoplist) {
+            Log.e(stop.getStop(), stop.getLattitude() + " : " + stop.getLongitude());
             optionses[i] = new MarkerOptions();
-            if(i%2 == 0){
+            if (i % 2 == 0) {
                 optionses[i].title(stop.getStop())
-                        .position(new LatLng(stop.getLattitude(),stop.getLongitude())).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place_white_24dp)) ;
-            } else{
+                        .position(new LatLng(stop.getLattitude(), stop.getLongitude())).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place_white_24dp));
+            } else {
                 optionses[i].title(stop.getStop())
-                        .position(new LatLng(stop.getLattitude(),stop.getLongitude())).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place_white_24dp)) ;
+                        .position(new LatLng(stop.getLattitude(), stop.getLongitude())).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place_white_24dp));
             }
-            if(i==0) optionses[i].snippet("Origin of journey").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp));
-            if(stop.isJunction()) {
-                optionses[i].snippet("Change your buse here").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp)) ;
-                junction_stop = i ;
+            if (i == 0)
+                optionses[i].snippet("Origin of journey").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp));
+            if (stop.isJunction()) {
+                optionses[i].snippet("Change your buse here").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp));
+                junction_stop = i;
             }
-            if(i==stoplist.size()-1) optionses[i].snippet("Destination of your journey").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp));
+            if (i == stoplist.size() - 1)
+                optionses[i].snippet("Destination of your journey").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp));
 
-            i++ ;
+            i++;
         }
 
     }
 
-    private void initializePolyline(){
-        polylineOptionses = new PolylineOptions[2] ;
-        int i=0;
-        boolean haveJunction = false ;
+    private void initializePolyline() {
+        polylineOptionses = new PolylineOptions[2];
+        int i = 0;
+        boolean haveJunction = false;
         polylineOptionses[0] = new PolylineOptions();
-        for(Stop stop:stoplist){
-            polylineOptionses[0].add(new LatLng(stop.getLattitude(), stop.getLongitude())) ;
-            if(stop.isJunction()) {
+        for (Stop stop : stoplist) {
+            polylineOptionses[0].add(new LatLng(stop.getLattitude(), stop.getLongitude()));
+            if (stop.isJunction()) {
                 haveJunction = true;
                 break;
             }
-            i++ ;
+            i++;
         }
-        if(haveJunction){
-            junction_stop = i ;
+        if (haveJunction) {
+            junction_stop = i;
             polylineOptionses[1] = new PolylineOptions();
-            for(int j=i;j<stoplist.size();j++){
+            for (int j = i; j < stoplist.size(); j++) {
                 Stop stop = stoplist.get(j);
                 polylineOptionses[1].add(new LatLng(stop.getLattitude(), stop.getLongitude()));
             }
@@ -177,17 +188,28 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
     }
 
 
-    public void showInfoWindow(int position){
+    public void showInfoWindow(int position) {
+        if(map==null || stoplist==null) return;
         markers[position].showInfoWindow();
         LatLng bhopal = markers[position].getPosition();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(bhopal, 15);
         map.animateCamera(cameraUpdate);
     }
 
-    private void setupMap(){
+    private void setupMap() {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             // only for gingerbread and newer versions
             map.getUiSettings().setMyLocationButtonEnabled(true);
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             map.setMyLocationEnabled(true);
         }
 
@@ -233,6 +255,6 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap ;
-        setupMap();
+        if(stoplist != null) setupMap();
     }
 }
