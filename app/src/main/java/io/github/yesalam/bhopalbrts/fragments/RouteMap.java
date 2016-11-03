@@ -74,7 +74,6 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onStart() {
-        Log.e(LOG_TAG, "onStart called");
         super.onStart();
         if (map == null) {
             //map = supportMapFragment.getMap();
@@ -84,7 +83,6 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
                setupMap();
            }*/
         }
-        Log.e(LOG_TAG, "onStart finished");
     }
 
     @Override
@@ -109,11 +107,9 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
         FragmentManager fm = getChildFragmentManager();
         supportMapFragment = (SupportMapFragment) fm.findFragmentById(R.id.legacy_map_container);
         if (supportMapFragment == null) {
-            Log.e(LOG_TAG, "Didnt find fragment");
             supportMapFragment = SupportMapFragment.newInstance();
             fm.beginTransaction().replace(R.id.legacy_map_container, supportMapFragment).commit();
         }
-        Log.e(LOG_TAG, "onActivityCreated finished");
     }
 
     private void initializeMarker() {
@@ -200,7 +196,7 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             // only for gingerbread and newer versions
             map.getUiSettings().setMyLocationButtonEnabled(true);
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+           /* if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -208,10 +204,12 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
+                Log.e(LOG_TAG,"returning without initaill") ;
                 return;
-            }
-            map.setMyLocationEnabled(true);
+            }*/
+           // map.setMyLocationEnabled(true);
         }
+
 
 
         // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
@@ -219,7 +217,6 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
 
         initializeMarker();
         initializePolyline();
-
         // Updates the location and zoom of the MapView
         int mid = (stoplist.size())/2 ;
         LatLng bhopal = new LatLng(stoplist.get(mid).getLattitude(), stoplist.get(mid).getLongitude());

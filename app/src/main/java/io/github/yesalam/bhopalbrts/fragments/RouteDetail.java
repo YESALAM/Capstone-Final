@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import io.github.yesalam.bhopalbrts.Interface.ReadynessListener;
 import io.github.yesalam.bhopalbrts.Interface.ShowInfoListener;
 import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.adapter.RouteDetailAdapter;
@@ -30,6 +31,7 @@ public class RouteDetail extends Fragment implements AdapterView.OnItemClickList
     //AssetDatabaseHelper dbHelper;
     ArrayList<Stop> stopList ;
     ShowInfoListener showInfoListener;
+    ReadynessListener readynessListener ;
     View view;
 
     public RouteDetail(){}
@@ -38,6 +40,7 @@ public class RouteDetail extends Fragment implements AdapterView.OnItemClickList
     public void onStart() {
         super.onStart();
         initialize();
+        readynessListener.imReady();
     }
 
     @Override
@@ -90,6 +93,7 @@ public class RouteDetail extends Fragment implements AdapterView.OnItemClickList
         // the callback interface. If not, it throws an exception
         try {
             showInfoListener = (ShowInfoListener) activity;
+            readynessListener = (ReadynessListener) activity;
         } catch (ClassCastException e) {
             Log.e(LOG_TAG,"Activity should implement interface");
             throw new ClassCastException(activity.toString()

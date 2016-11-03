@@ -80,13 +80,23 @@
     ]]></string>
     <string name="contact_alam_detail"><![CDATA[
             <p>
-        Phone       :  +918982384594 <br>
+
         Email       :  <a href="mailto:itisalam@gmail.com" target="_blank">itisalam@gmail.com</a><br>
-        Facebook    :  <a href="http://fb.com/sadarealam786" >fb.com/sadarealam786 </a><br>
-        Twitter     :  <a href="http://twitter.com/nextisalam">twitter.com/nextisalam</a><br>
+
         </p>
     ]]></string>
     <string name="title_activity_maps">Map</string>
     <string name="content_authority">io.github.yesalam.bhopalbrts</string>
+
+
+
+    <string name="error_input_origin">Please enter Origin</string>
+    <string name="error_input_destination">Please enter Destination</string>
+    <string name="error_origin_unknown">Origin not found</string>
+    <string name="error_destination_unknown">Destination not fount</string>
+    <string name="error_input_same">You are at destination already</string>
+
+
+    <string name="brts_widget">BRTS Route</string>
 
 </resources>

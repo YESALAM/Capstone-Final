@@ -3,11 +3,15 @@ package io.github.yesalam.bhopalbrts.data;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
+import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
+import io.github.yesalam.bhopalbrts.R;
 
 /**
  * Created by yesalam on 26/10/16.
@@ -27,6 +31,7 @@ public class DataProvider extends ContentProvider {
     static final int ID_WITH_STOP_NAME = 201 ;
     static final int ALL_BW_IDS = 202 ;
     //static final int ALL_WITH_IDS = 203 ;
+    static final int ALL_ROUTES = 301 ;
 
 
 
@@ -43,6 +48,7 @@ public class DataProvider extends ContentProvider {
         matcher.addURI(authority,BusDataContract.PATH_ROUTE+"/*/*",ID_WITH_STOP_NAME);
         matcher.addURI(authority,BusDataContract.PATH_ROUTE+"/*/*/*", ALL_BW_IDS);
 
+        matcher.addURI(authority,BusDataContract.PATH_ALL_ROUTES,ALL_ROUTES);
         return matcher ;
 
     }
@@ -93,17 +99,9 @@ public class DataProvider extends ContentProvider {
                         null,
                         null
                 );
-                /*String constrain = uri.getLastPathSegment() ;
-                String sql = "select _id,stop from allstops where stop like '"+constrain+"%' or stop like '%"+constrain+"%'" ;
-                retCursor = databaseHelper.getReadableDatabase().rawQuery(sql,null) ;*/
+
                 break;
-           /* case STOPS_AND_VICINITY_WITH_QUERY :
-                String constrain = uri.getLastPathSegment() ;
-                String[] projectionin = {"_id","stop","vicinity"};
-                selection = "stop like "+"'"+constrain+"%'"+" or stop like '%"+constrain+"%'"+"or vicinity like "+"'%"+constrain+"%'";
-                SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
-                builder.setTables("allstops");
-                break;*/
+
             case JUNCTION_FROM_ROUTE :
                 String route_name = uri.getLastPathSegment() ;
                 retCursor = databaseHelper.getReadableDatabase().query(
@@ -140,14 +138,28 @@ public class DataProvider extends ContentProvider {
                 );
                 Log.e("ContentProvider",retCursor.toString()) ;
                 break;
-            /*case ALL_WITH_IDS :
-                break;*/
+            case ALL_ROUTES:
+                String[] columns = {BusDataContract.ALLROUTES._ID,BusDataContract.ALLROUTES.COLUMN_NAME,BusDataContract.ALLROUTES.COLUMN_ENDS,BusDataContract.ALLROUTES.COLUMN_STOP_COUNT} ;
+                MatrixCursor matrixCursor = new MatrixCursor(columns) ;
+                Resources res = getContext().getResources() ;
+                String[] names = res.getStringArray(R.array.routes_array);
+                String[] ends = res.getStringArray(R.array.route_nodes);
+                String[] stop_count = res.getStringArray(R.array.stop_count);
+                for(int i=0;i<names.length;i++){
+                    String[] cdata = {Integer.toString(i),names[i],ends[i],stop_count[i]};
+                    matrixCursor.addRow(cdata);
+                }
+
+                return matrixCursor ;
+
             default:
                 throw new UnsupportedOperationException("Unknown uri: "+uri) ;
         }
 
         return retCursor;
     }
+
+
 
     @Nullable
     @Override
@@ -170,8 +182,8 @@ public class DataProvider extends ContentProvider {
                 return BusDataContract.ROUTE.CONTENT_ITEM_TYPE ;
             case ALL_BW_IDS:
                 return BusDataContract.ROUTE.CONTENT_TYPE ;
-            /*case ALL_WITH_IDS :
-                return BusDataContract.ROUTE.CONTENT_TYPE ;*/
+            case ALL_ROUTES:
+                return BusDataContract.ALLROUTES.CONTENT_TYPE ;
             default:
                 throw new UnsupportedOperationException("Unknown uri: "+uri) ;
         }

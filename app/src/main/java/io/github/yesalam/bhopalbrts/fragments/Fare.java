@@ -58,7 +58,7 @@ public class Fare extends Fragment implements View.OnClickListener,TextWatcher {
     TextView farerupee;
     TextView viaholder;
     SimpleCursorAdapter adapter;
-    String mCurFilter = null ;
+
 
 
     static int flag = 0 ;
@@ -134,9 +134,6 @@ public class Fare extends Fragment implements View.OnClickListener,TextWatcher {
 
             }
         });
-
-
-
 
         actvfrom.setAdapter(adapter);
         actvto.setAdapter(adapter);
@@ -218,26 +215,29 @@ public class Fare extends Fragment implements View.OnClickListener,TextWatcher {
     }
 
 
-    private  boolean isInputValid(String from , String to ){
-        Context context = getActivity();
+    public boolean isInputValid(String from , String to ){
         if(from.isEmpty()){
-            Toast.makeText(context, "Please enter Origin", Toast.LENGTH_SHORT).show();
+            toastIt(R.string.error_input_origin);
             return false ;
         }else if(ivfrom.getVisibility() == View.VISIBLE){
-            Toast.makeText(context,"Origin not found",Toast.LENGTH_SHORT).show();
+            toastIt(R.string.error_origin_unknown);
             return false;
         }else if(to.isEmpty()){
-            Toast.makeText(context,"Please enter Destination",Toast.LENGTH_SHORT).show();
+            toastIt(R.string.error_input_destination);
             return false ;
         }else if(ivto.getVisibility() == View.VISIBLE){
-            Toast.makeText(context,"Destination not found",Toast.LENGTH_SHORT).show();
+            toastIt(R.string.error_destination_unknown);
             return false ;
         }else if(from.equalsIgnoreCase(to)){
-            Toast.makeText(context,"You are at destination already ",Toast.LENGTH_SHORT).show();
+            toastIt(R.string.error_input_same);
             return false ;
         }else {
             return true ;
         }
+    }
+
+    private void toastIt(int message){
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
 

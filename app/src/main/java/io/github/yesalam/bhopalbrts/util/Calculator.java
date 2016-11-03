@@ -28,7 +28,6 @@ public class Calculator {
     private final String LOG_TAG = Calculator.class.getSimpleName();
     private String origin;
     private String destination;
-    //AssetDatabaseHelper dataBaseHelper;
     private float fare = 0 ;
     private String route = null ;
     private Context context ;
@@ -323,12 +322,8 @@ public class Calculator {
             startId= stopId;
             stopId = temp;
         }
-        //Log.e("Database",from+"  "+to+"  "+bus);
-        //String sql = "select dist from "+route+" where _id = "+fromid+" or _id = "+toid ;
         String[] projection = {BusDataContract.ROUTE.COLUMN_DIST} ;
         String selection = "_id =" + startId+" or _id = "+stopId ;
-        // Log.e("Database",sql);
-        //Cursor cursor = getReadableDatabase().rawQuery(sql, null);
         Cursor cursor = context.getContentResolver().query(BusDataContract.ROUTE.buildAllbwIdUri(route,startId,stopId),projection,selection,null,null) ;
         cursor.moveToFirst();//TODO Check NullPointerException
         float first_distant = cursor.getFloat(0);
@@ -432,7 +427,6 @@ public class Calculator {
         String selection = "isJunction = 1 " ;
 
         Cursor cursor = context.getContentResolver().query(BusDataContract.ROUTE.buildJuctionRouteUri(route),projection,selection,null,null) ;
-        //Cursor cursor = getReadableDatabase().rawQuery("select stop_name from " + bustable + " where isJunction = 1", null);
 
         while(cursor.moveToNext()){
             result.add(cursor.getString(0));

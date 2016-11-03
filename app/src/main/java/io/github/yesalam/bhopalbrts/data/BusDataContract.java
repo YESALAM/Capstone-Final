@@ -18,6 +18,8 @@ public class BusDataContract {
 
     public static final String PATH_ROUTE = "route" ;
 
+    public static final String PATH_ALL_ROUTES = "allroute" ;
+
     public static final class STOPS implements BaseColumns {
         public static final Uri BASE_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_ALL_STOP).build() ;
 
@@ -83,6 +85,15 @@ public class BusDataContract {
             return BASE_URI.buildUpon().appendPath(""+stopId).appendPath(""+startId).appendPath(route).build() ;
         }
 
+    }
+
+    public static final class ALLROUTES  implements BaseColumns{
+        public static final Uri BASE_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_ALL_ROUTES).build() ;
+        public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE+ "/" +CONTENT_AUTHORITY+"/" +PATH_ALL_ROUTES ;
+
+        public static final String COLUMN_ENDS = "ends" ;
+        public static final  String COLUMN_NAME =   "name" ;
+        public static final String COLUMN_STOP_COUNT = "stopcount" ;
     }
 
 

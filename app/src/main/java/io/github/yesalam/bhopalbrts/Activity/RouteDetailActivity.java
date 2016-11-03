@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+import io.github.yesalam.bhopalbrts.Interface.ReadynessListener;
 import io.github.yesalam.bhopalbrts.Interface.ShowInfoListener;
 import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.adapter.RouteActivityPagerAdapter;
@@ -23,18 +24,20 @@ import io.github.yesalam.bhopalbrts.fragments.RouteDetail;
 import io.github.yesalam.bhopalbrts.fragments.RouteMap;
 import io.github.yesalam.bhopalbrts.data.AssetDatabaseHelper;
 import io.github.yesalam.bhopalbrts.util.Calculator;
+import io.github.yesalam.bhopalbrts.util.Util;
 
 import java.util.ArrayList;
 
 /**
  * Created by yesalam on 22-08-2015.
  */
-public class RouteDetailActivity extends AppCompatActivity implements ShowInfoListener,LoaderManager.LoaderCallbacks<Cursor> {
+public class RouteDetailActivity extends AppCompatActivity implements ShowInfoListener,LoaderManager.LoaderCallbacks<Cursor> ,ReadynessListener {
     private final String LOG_TAG = RouteDetailActivity.class.getSimpleName();
 
     ArrayList<Stop> stoplist ;
     ViewPager viewPager;
     RouteActivityPagerAdapter pagerAdapter ;
+    boolean isDataset ;
     int startid ;
     int stopid ;
     String junction ;
@@ -72,7 +75,6 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
 
         switch (id){
             case R.id.action_list :
-                Log.i(LOG_TAG, "setting clicked");
                 viewPager.setCurrentItem(0,true);
                 return true;
 
@@ -100,13 +102,12 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
      *
      */
     private void initialize(){
-       // dbHelper =  AssetDatabaseHelper.getDatabaseHelper(this);
 
         Intent intent = getIntent() ;
-         from = intent.getStringExtra("ORIGIN") ;
-         to =  intent.getStringExtra("DESTINATION");
-        junction = intent.getStringExtra("JUNCTION") ;
-         bus = intent.getStringExtra("BUS");
+         from = intent.getStringExtra(Util.ORIGIN) ;
+         to =  intent.getStringExtra(Util.DESTINATION);
+        junction = intent.getStringExtra(Util.JUNCTION) ;
+         bus = intent.getStringExtra(Util.BUS);
         setTitle(bus);
 
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -119,12 +120,12 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
         if(junction==null){
             startid = Calculator.getId(this,from, bus);
             stopid = Calculator.getId(this,to, bus);
-            args.putString("BUS",bus);
+            args.putString(Util.BUS,bus);
         }else{
             String[] buses = bus.split("\\+");
             startid = Calculator.getId(this,from, buses[0]);
             stopid = Calculator.getId(this,junction,buses[0]) ;
-            args.putString("BUS",buses[0]);
+            args.putString(Util.BUS,buses[0]);
             bus = buses[1] ;
         }
         getSupportLoaderManager().initLoader(0, args, this);
@@ -137,16 +138,12 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
 
     @Override
     public void showInfo(int position) {
-        //TODO CardDeatail fragments have called this method .
-
         RouteMap mapFragment = (RouteMap)
                 getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.routepager + ":1");
         if (mapFragment != null) {
             if(mapFragment.stoplist == null ) mapFragment.setData(stoplist);
             mapFragment.showInfoWindow(position);
             viewPager.setCurrentItem(1,true);
-        } else {
-            Log.e(LOG_TAG, "Fragment no available");
         }
     }
 
@@ -155,13 +152,12 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
         String selection ;
         if(startid>stopid) selection = " _id >= "+ stopid + " and _id<= " + startid ;
         else selection = " _id >= "+ startid + " and _id<= " + stopid ;
-        Uri uri = BusDataContract.ROUTE.buildAllbwIdUri(args.getString("BUS"),startid,stopid) ;
+        Uri uri = BusDataContract.ROUTE.buildAllbwIdUri(args.getString(Util.BUS),startid,stopid) ;
         String[] projection = {BusDataContract.ROUTE.COLUMN_STOPNAME,BusDataContract.ROUTE.COLUMN_LATITUDE,BusDataContract.ROUTE.COLUMN_LONGITUDE, BusDataContract.ROUTE.COLUMN_DIST} ;
 
         CursorLoader cl = new CursorLoader(this,uri,projection,selection,null,null);
 
-        //Cursor cursor = getReadableDatabase().rawQuery("select stop_name,latitude,longitude,dist from " + bus + " where _id >=" + startid + " and _id<= " + stopid, null) ;
-        //Cursor cursor =  getContentResolver().query(BusDataContract.ROUTE.buildAllbwIdUri(bus,startid,stopid),projection,selection,null,null) ;
+
         return cl ;
     }
 
@@ -172,16 +168,13 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
     }
 
     private void setData(){
-
-
         RouteDetail routeDetail = (RouteDetail) getSupportFragmentManager().findFragmentByTag("android:switcher:"+R.id.routepager+":0") ;
         RouteMap mapFragment = (RouteMap)
                 getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.routepager + ":1");
 
-        if(routeDetail!=null) routeDetail.setData(stoplist);
-        if(mapFragment!=null) mapFragment.setData(stoplist);
-        else {
-            Log.e(LOG_TAG, "Fragment no available");
+        if(mapFragment!=null && routeDetail!=null && stoplist!= null){
+            mapFragment.setData(stoplist);
+            routeDetail.setData(stoplist);
         }
     }
 
@@ -193,7 +186,7 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
     public void processCursor(Cursor cursor){
         if(junction == null ) {
             stoplist = getRouteDetail(cursor) ;
-            //TODO feed data
+
             setData();
         } else {
             if(flag==0){
@@ -201,7 +194,7 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
                 startid = Calculator.getId(this,junction,bus) ;
                 stopid = Calculator.getId(this,to,bus) ;
                 Bundle args = new Bundle() ;
-                args.putString("BUS",bus);
+                args.putString(Util.BUS,bus);
                 getSupportLoaderManager().restartLoader(0, args, this);
                 flag = 1 ;
             }else{
@@ -215,32 +208,9 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
                     temp.get(j).setDist(dist+cdist);
                     stoplist.add(temp.get(j));
                 }
-                //TODO feed data
+
                 setData();
             }
-
-           // String[] buses = bus.split("\\+");
-          /*  ArrayList<Stop>[] lists = new ArrayList[2] ;
-            for(int i=0 ;i<buses.length;i++){
-                lists[i] = calculator.getRouteDetail(buses[i]);
-                Log.i(LOG_TAG,i+" times runned");
-                from = junction ;
-                junction = to ;
-            }
-
-            //changes the Juction .
-            lists[0].get(lists[0].size()-1).setIsJunction(true);
-
-            int count = lists[1].size() ;
-            float cdist =  lists[0].get(lists[0].size()-1).getDist() ;
-            for(int j=1;j<count;j++){
-                float dist = lists[1].get(j).getDist();
-
-                lists[1].get(j).setDist(dist+cdist);
-                lists[0].add(lists[1].get(j));
-            }
-
-            stoplist = lists[0] ;*/
 
         }
     }
@@ -308,5 +278,10 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
         }
         cursor.close();
         return  result ;
+    }
+
+    @Override
+    public void imReady() {
+        setData();
     }
 }
