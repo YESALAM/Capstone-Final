@@ -4,7 +4,7 @@
     android:initialLayout="@layout/widget_route_list"
     android:minHeight="110dp"
     android:minWidth="240dp"
-    android:previewImage="@drawable/stock_hawk_ori_portrait"
+    android:previewImage="@drawable/bhopal_brts_ori_portrait"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="0"
     android:widgetCategory="home_screen"></appwidget-provider>
