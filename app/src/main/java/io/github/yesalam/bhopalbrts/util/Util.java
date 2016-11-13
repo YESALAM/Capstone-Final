@@ -17,5 +17,12 @@ public class Util {
         return floatdist;
     }
 
+    public static String ORIGIN = "ORIGIN" ;
+    public static String DESTINATION = "DESTINATION" ;
+    public static String JUNCTION = "JUNCTION" ;
+    public static String BUS = "BUS" ;
+    public static String FARE = "FARE" ;
+
+
 
 }

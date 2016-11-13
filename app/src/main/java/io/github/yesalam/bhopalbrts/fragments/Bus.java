@@ -35,9 +35,11 @@ import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.Activity.RouteDetailActivity;
 import io.github.yesalam.bhopalbrts.Activity.SelectStopActivity;
 import io.github.yesalam.bhopalbrts.adapter.CardAdapter;
+import io.github.yesalam.bhopalbrts.data.BusDataContract;
 import io.github.yesalam.bhopalbrts.datamodel.CardData;
-import io.github.yesalam.bhopalbrts.util.AssetDatabaseHelper;
+import io.github.yesalam.bhopalbrts.data.AssetDatabaseHelper;
 import io.github.yesalam.bhopalbrts.util.Calculator;
+import io.github.yesalam.bhopalbrts.util.Util;
 
 import java.util.List;
 
@@ -45,11 +47,10 @@ import java.util.List;
  * This fragment show two EditText view which is used to enter the origin and
  * destination of the journey and then search the relevant route , distance and fare .
  */
-public class Bus extends Fragment implements View.OnClickListener ,AdapterView.OnItemClickListener {
+public class Bus extends Fragment implements View.OnClickListener ,AdapterView.OnItemClickListener,TextWatcher {
 
     private final String LOG_TAG = Bus.class.getSimpleName() ;
-    Bhopal_BRTS activity ;
-    SharedPreferences setting ;
+
 
     AutoCompleteTextView actvfrom;
     AutoCompleteTextView actvto ;
@@ -63,22 +64,21 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
     ListView listView ;
     CardAdapter cadapter;
     RelativeLayout input_area ;
-    //LinearLayout main_layout ;
+
 
 
     SimpleCursorAdapter adapter;
     List<CardData> dataset ;
 
-    AssetDatabaseHelper dbHelper ;
+
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.activity = (Bhopal_BRTS) activity ;
     }
 
     private void initialize(){
-       // main_layout = (LinearLayout) getView().findViewById(R.id.main_layout_bus);
+
         input_area = (RelativeLayout) getView().findViewById(R.id.input_area);
         actvfrom = (AutoCompleteTextView) getView().findViewById(R.id.autoCompleteTextViewFindRouteFrom);
         actvto = (AutoCompleteTextView) getView().findViewById(R.id.autoCompleteTextViewFindRouteTo);
@@ -94,9 +94,6 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
         bus_motion = (ImageView) getView().findViewById(R.id.bus_motion_view);
 
 
-
-        dbHelper = AssetDatabaseHelper.getDatabaseHelper(activity);
-
         String[] from = {"stop"};
         int[] to = {android.R.id.text1};
 
@@ -109,7 +106,6 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
                 } else {
                     final int colIndex = cursor.getColumnIndexOrThrow("stop");
                     String result = cursor.getString(colIndex);
-
                     return result;
                 }
 
@@ -123,9 +119,11 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
                 if (constraint != null) {
                     int count = constraint.length();
                     if (count >= 3) {
-                        String constrains = constraint.toString();
+                        String query = constraint.toString();
 
-                        cursor = dbHelper.getStops(constrains);
+                        String[] projection = {BusDataContract.STOPS._ID,BusDataContract.STOPS.COLUMN_STOP} ;
+                        String selection = "stop like '"+query+"%' or stop like '%"+query+"%'" ;
+                        cursor = getContext().getContentResolver().query(BusDataContract.STOPS.buildStopqueryUri(query),projection,selection,null,null);
                     }
                 }
                 return cursor;
@@ -143,48 +141,9 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
         ivfrom.setOnClickListener(this);
         ivto.setOnClickListener(this);
 
-        actvfrom.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        actvfrom.addTextChangedListener(this);
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(start==0 ) {
-                    ivfrom.setVisibility(View.GONE);
-                } else {
-                    ivfrom.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        actvto.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (start == 0) {
-                    ivto.setVisibility(View.GONE);
-                } else {
-                    ivto.setVisibility(View.VISIBLE);
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        actvto.addTextChangedListener(this);
 
 
     }
@@ -197,8 +156,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
     }
 
     public void onStart(){
-        //setting = activity.setting ;
-        //setting.edit().putInt("tab_id",3).commit();
+
         super.onStart();
         initialize();
         moveViewToScreenCenter(bus_motion);
@@ -228,22 +186,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
                     listView.setVisibility(View.GONE);
                     bus_motion.invalidate();
 
-
-                    //int main_layout_height = main_layout.getHeight() ;
-                    //int input_area_height = input_area.getHeight() ;
-
                     searchHandler(from, to);
-
-                    //int list_view_height = setListViewHeightBasedOnChildren(listView) ;
-
-                    // Only hide the input area if remaining space is not able to accommodate the list view.
-
-                  /*  if((main_layout_height-input_area_height)>list_view_height) {
-
-                    } else{
-                        input_area.setVisibility(View.GONE);
-
-                    }*/
                 }
 
                 break;
@@ -265,7 +208,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
      *
      */
     private void searchHandler(String from , String to) {
-        dataset = new Calculator(from,to, dbHelper).calc() ;
+        dataset = new Calculator(from,to, getContext()).calc() ;
         cadapter = new CardAdapter(getActivity(),dataset);
 
 
@@ -306,28 +249,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
     }
 
 
-    public static int setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            // pre-condition
-            return 0;
-        }
 
-        int totalHeight = 0;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
-        }
-
-        totalHeight = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-
-        return totalHeight ;
-       /* ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
-        listView.requestLayout();*/
-    }
 
 
 
@@ -335,43 +257,74 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         CardData currentData = (CardData) listView.getItemAtPosition(position);
         Intent intent = new Intent(getActivity(), RouteDetailActivity.class);
-        intent.putExtra("ORIGIN",currentData.getFrom());
-        intent.putExtra("DESTINATION",currentData.getTo());
-        intent.putExtra("JUNCTION",currentData.getJunctions());
-        intent.putExtra("FARE",currentData.getFare());
-        intent.putExtra("BUS", currentData.getBuses());
+        intent.putExtra(Util.ORIGIN,currentData.getFrom());
+        intent.putExtra(Util.DESTINATION,currentData.getTo());
+        intent.putExtra(Util.JUNCTION,currentData.getJunctions());
+        intent.putExtra(Util.FARE,currentData.getFare());
+        intent.putExtra(Util.BUS, currentData.getBuses());
         startActivity(intent);
 
     }
 
 
     public boolean isInputValid(String from , String to ){
-        Context context = getActivity() ;
         if(from.isEmpty()){
-            Toast.makeText(context, "Please enter Origin", Toast.LENGTH_SHORT).show();
+           toastIt(R.string.error_input_origin);
             return false ;
         }else if(ivfrom.getVisibility() == View.VISIBLE){
-            Toast.makeText(context,"Origin not found",Toast.LENGTH_SHORT).show();
+            toastIt(R.string.error_origin_unknown);
             return false;
         }else if(to.isEmpty()){
-            Toast.makeText(context,"Please enter Destination",Toast.LENGTH_SHORT).show();
+           toastIt(R.string.error_input_destination);
             return false ;
         }else if(ivto.getVisibility() == View.VISIBLE){
-            Toast.makeText(context,"Destination not found",Toast.LENGTH_SHORT).show();
+            toastIt(R.string.error_destination_unknown);
             return false ;
         }else if(from.equalsIgnoreCase(to)){
-            Toast.makeText(context,"You are at destination already ",Toast.LENGTH_SHORT).show();
+            toastIt(R.string.error_input_same);
             return false ;
         }else {
             return true ;
         }
     }
 
+    private void toastIt(int message){
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+        View view ;
+        if(actvfrom.isFocused()) view = ivfrom ;
+        else view = ivto ;
+        if(start==0 ) {
+            view.setVisibility(View.GONE);
+        } else {
+            view.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
+
+
     private void moveViewToScreenFinish( View view )
     {
 
         DisplayMetrics dm = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics( dm );
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics( dm );
         TranslateAnimation anim  = new TranslateAnimation( 0, -dm.widthPixels, 0,  0);
         anim.setDuration(1000);
         anim.setFillAfter( true );
@@ -382,10 +335,13 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
     {
 
         DisplayMetrics dm = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics( dm );
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics( dm );
         TranslateAnimation anim = new TranslateAnimation( dm.widthPixels, 0 , 0,  0);
         anim.setDuration(2000);
         anim.setFillAfter( true );
         view.startAnimation(anim);
     }
+
+
+
 }

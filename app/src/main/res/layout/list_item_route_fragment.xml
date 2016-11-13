@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/state_selector_list"
+    android:id="@+id/list_route_fragment_wrapper"
     android:padding="5dp">
 <!--    android:background="@drawable/state_selector_list"-->
 

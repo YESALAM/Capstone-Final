@@ -31,17 +31,16 @@ public class RouteActivityPagerAdapter extends FragmentPagerAdapter {
         } else {
             return "Route Map" ;
         }
+
     }
 
     @Override
     public Fragment getItem(int position) {
         if(position == 0) {
             RouteDetail fragment = new RouteDetail() ;
-            fragment.setStopList(stopList);
             return fragment ;
         } else {
             RouteMap fragment = new RouteMap();
-            fragment.setStoplist(stopList);
             return fragment ;
         }
 

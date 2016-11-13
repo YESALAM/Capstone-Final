@@ -6,10 +6,14 @@ package io.github.yesalam.bhopalbrts.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +22,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS;
+import io.github.yesalam.bhopalbrts.Interface.ReadynessListener;
 import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.Activity.RouteDetailActivity;
 import io.github.yesalam.bhopalbrts.adapter.RouteListAdapter;
+import io.github.yesalam.bhopalbrts.data.BusDataContract;
+import io.github.yesalam.bhopalbrts.util.Util;
 
 import java.util.ArrayList;
 
@@ -33,21 +40,22 @@ public class Route extends Fragment implements AdapterView.OnItemClickListener {
 
     Bhopal_BRTS activity ;
     ListView listView ;
-
     ArrayList<String[]> data ;
-    SharedPreferences settings ;
+
+
+
 
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.activity = (Bhopal_BRTS) activity ;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_route,container,false);
         listView = (ListView) view.findViewById(R.id.routeListView);
+        listView.setOnItemClickListener(this);
 
         data = new ArrayList<>();
 
@@ -64,7 +72,6 @@ public class Route extends Fragment implements AdapterView.OnItemClickListener {
         RouteListAdapter adapter = new RouteListAdapter(getActivity(),data);
 
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(this);
 
         return view ;
     }
@@ -78,58 +85,13 @@ public class Route extends Fragment implements AdapterView.OnItemClickListener {
         String destination = leafs[1] ;
         String junction = null ;
         Intent intent = new Intent(getActivity(), RouteDetailActivity.class);
-        intent.putExtra("BUS",route);
-        intent.putExtra("ORIGIN",origin);
-        intent.putExtra("DESTINATION",destination);
-        intent.putExtra("JUNCTION",junction);
+        intent.putExtra(Util.BUS,route);
+        intent.putExtra(Util.ORIGIN,origin);
+        intent.putExtra(Util.DESTINATION,destination);
+        intent.putExtra(Util.JUNCTION,junction);
         startActivity(intent);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.e(LOG_TAG, "OnStop called");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.e(LOG_TAG, "OnPause called");
-    }
-
-    @Override
-    public void onStart() {
-        //settings = activity.setting ;
-        //settings.edit().putInt("tab_id",3).commit();
-        super.onStart();
-        Log.e(LOG_TAG, "OnStart called");
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.e(LOG_TAG, "OnCreate called");
-    }
-
-    @Override
-    public void onResume() {
-        Log.e(LOG_TAG, "OnResume called");
-        super.onResume();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.e(LOG_TAG, "OnDestroy called");
-
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        Log.e(LOG_TAG, "OnLowMemory called");
-
-    }
 
 
 }

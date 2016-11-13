@@ -1,8 +1,7 @@
-package io.github.yesalam.bhopalbrts.util;
+package io.github.yesalam.bhopalbrts.data;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
@@ -16,19 +15,14 @@ import java.util.List;
  */
 public class AssetDatabaseHelper extends SQLiteAssetHelper {
     private static final String DB_NAME = "brtsM.db" ;
-    private static final int DB_VERSION = 1 ;
-    public static AssetDatabaseHelper insatance = null ;
+    private static final int DB_VERSION = 2 ;
+    //public static AssetDatabaseHelper insatance = null ;
 
-    private AssetDatabaseHelper(Context context) {
-        super(context,"brtsM.db", null,1 );
+    public AssetDatabaseHelper(Context context) {
+        super(context,DB_NAME, null,DB_VERSION );
     }
 
-    public static AssetDatabaseHelper getDatabaseHelper(Context context){
-        if(insatance == null ){
-            insatance = new AssetDatabaseHelper(context);
-        }
-        return insatance ;
-    }
+
 
     public String getBuses(String stop){
         String sql = "select buses from allstops where stop =='"+stop+"'" ;
@@ -50,6 +44,8 @@ public class AssetDatabaseHelper extends SQLiteAssetHelper {
         return  result ;
     }
 
+
+    //TODO we could remove this .
     public Cursor getAllStops(CharSequence constrain){
         String sql = "select _id,stop,vicinity from allstops where stop like '"+constrain+"%'" ;
 
@@ -64,10 +60,6 @@ public class AssetDatabaseHelper extends SQLiteAssetHelper {
         return  builder.query(getReadableDatabase(), projectionin, selection, null, null, null, null);
     }
 
-    public Cursor query(CharSequence constrain,boolean b){
-        String sql = "select _id,stop , vicinity from allstops where stop like '"+constrain+"%' union all select _id,stop ,vicinity from allstops where vicinity like '%"+constrain+"%'";
-        return getReadableDatabase().rawQuery(sql, null);
-    }
 
 
 

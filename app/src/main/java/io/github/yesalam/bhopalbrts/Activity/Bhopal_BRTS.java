@@ -11,53 +11,30 @@ import android.view.MenuItem;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.adapter.TabPagerAdapter;
-import io.github.yesalam.bhopalbrts.util.DataBaseHelper;
 
 public class Bhopal_BRTS extends AppCompatActivity {
 
     private final String LOG_TAG = Bhopal_BRTS.class.getSimpleName();
     private final String PREFERENCE_NAME = "apppreference" ;
-    private final String TAB_ID = "tab_id" ;
     ViewPager viewPager ;
     TabPagerAdapter tabPagerAdapter;
-    //DataBaseHelper dbhelper ;
     TabLayout tabLayout;
-    //public static SharedPreferences setting;
     AdView mAdView ;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bhopal__brts);
-        //setting = getSharedPreferences(PREFERENCE_NAME,0);
-        //Reason of the very first bug of my this software.
-        //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        //dbhelper = DataBaseHelper.getInstance(this);
-
-       /* try {
-
-            dbhelper.createDataBase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-        /*try{
-
-            dbhelper.openDataBase();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
-
+        setContentView(R.layout.activity_bhopal_brts);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-         mAdView = (AdView) findViewById(R.id.adViewmain);
-
+        mAdView = (AdView) findViewById(R.id.adViewMain) ;
 
         // Create the adapter that will return a fragment for each of the four
         // primary sections of the activity.
@@ -67,20 +44,9 @@ public class Bhopal_BRTS extends AppCompatActivity {
 
         tabLayout.setupWithViewPager(viewPager);
 
-       /* int tab_id = setting.getInt(TAB_ID,0);
-        if(tab_id == 0){
-            //let it be calling for first time
-        } else {
-            viewPager.setCurrentItem(tab_id-1);
-        }*/
 
-
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
+        AdRequest adRequest = new AdRequest.Builder().build() ;
         mAdView.loadAd(adRequest);
-
-
-
     }
 
     @Override
@@ -122,35 +88,25 @@ public class Bhopal_BRTS extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-       /* try {
-            dbhelper.openDataBase();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
+
     }
 
-    public DataBaseHelper getDbhelper(){
-        //return dbhelper ;
-        return null ;
-    }
+
 
     @Override
     protected void onStop() {
         super.onStop();
-        //dbhelper.close();
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //dbhelper.close();
+
     }
 
     @Override
     public void finish() {
-        Log.e(LOG_TAG, "Finish called");
-        //setting.edit().putInt(TAB_ID,1).commit();
-        //dbhelper.close();
         super.finish();
     }
 }

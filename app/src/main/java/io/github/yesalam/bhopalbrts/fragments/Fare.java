@@ -12,6 +12,9 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -30,19 +33,19 @@ import android.widget.Toast;
 import io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS;
 import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.Activity.SelectStopActivity;
-import io.github.yesalam.bhopalbrts.util.AssetDatabaseHelper;
+import io.github.yesalam.bhopalbrts.data.AssetDatabaseHelper;
+import io.github.yesalam.bhopalbrts.data.BusDataContract;
 import io.github.yesalam.bhopalbrts.util.Calculator;
 
 /**
  * This fragment is for minimum fare calculation between two stops . Stops
  * may be direct or via junctions.
  */
-public class Fare extends Fragment implements View.OnClickListener {
+public class Fare extends Fragment implements View.OnClickListener,TextWatcher {
 
     Bhopal_BRTS activity ;
 
     private final String LOG_TAG = Fare.class.getSimpleName() ;
-    SharedPreferences setting ;
 
     AutoCompleteTextView actvfrom;
     AutoCompleteTextView actvto ;
@@ -54,10 +57,11 @@ public class Fare extends Fragment implements View.OnClickListener {
     TextView fareamount;
     TextView farerupee;
     TextView viaholder;
-    //DataBaseHelper dbManager;
     SimpleCursorAdapter adapter;
 
-    AssetDatabaseHelper dbHelper ;
+
+
+    static int flag = 0 ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,9 +71,6 @@ public class Fare extends Fragment implements View.OnClickListener {
     }
 
     public void onStart(){
-       //setting = activity.setting ;
-        //setting.edit().putInt("tab_id",3).commit();
-        Log.e("fare", "onStart called");
         super.onStart();
         initialize();
     }
@@ -96,9 +97,6 @@ public class Fare extends Fragment implements View.OnClickListener {
         farerupee.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/rupee.ttf"));
         farerupee.setText("`");
 
-
-        dbHelper = AssetDatabaseHelper.getDatabaseHelper(activity);
-
         String[] from = {"stop"};
         int[] to = {android.R.id.text1};
 
@@ -115,6 +113,9 @@ public class Fare extends Fragment implements View.OnClickListener {
 
             }
         });
+
+
+
         adapter.setFilterQueryProvider(new FilterQueryProvider() {
             @Override
             public Cursor runQuery(CharSequence constraint) {
@@ -123,8 +124,10 @@ public class Fare extends Fragment implements View.OnClickListener {
                 if(constraint!=null){
                     int count = constraint.length();
                     if(count>=3){
-                        String constrains = constraint.toString();
-                        cursor = dbHelper.getStops(constrains);
+                        String query = constraint.toString();
+                        String[] projection = {BusDataContract.STOPS._ID,BusDataContract.STOPS.COLUMN_STOP} ;
+                        String selection = "stop like '"+query+"%' or stop like '%"+query+"%'" ;
+                        cursor = getContext().getContentResolver().query(BusDataContract.STOPS.buildStopqueryUri(query),projection,selection,null,null);
                     }
                 }
                 return cursor;
@@ -142,49 +145,9 @@ public class Fare extends Fragment implements View.OnClickListener {
         ivfrom.setOnClickListener(this);
         ivto.setOnClickListener(this);
 
-        actvfrom.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        actvfrom.addTextChangedListener(this);
+        actvto.addTextChangedListener(this);
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(start==0 ) {
-                    ivfrom.setVisibility(View.GONE);
-                } else {
-                    ivfrom.setVisibility(View.VISIBLE);
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        actvto.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(start==0 ) {
-                    ivto.setVisibility(View.GONE);
-                } else {
-                    ivto.setVisibility(View.VISIBLE);
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
     }
 
     @Override
@@ -207,7 +170,7 @@ public class Fare extends Fragment implements View.OnClickListener {
                 //Chech the validity of input strings .
                 if(isInputValid(from,to))
                 {
-                    Calculator calci = new Calculator(from,to, dbHelper);
+                    Calculator calci = new Calculator(from,to, getContext());
                     calci.calc();
                     String fare =  calci.getFare()+"" ;
                     String via = calci.getRoute();
@@ -252,27 +215,54 @@ public class Fare extends Fragment implements View.OnClickListener {
     }
 
 
-    private  boolean isInputValid(String from , String to ){
-        Context context = getActivity();
+    public boolean isInputValid(String from , String to ){
         if(from.isEmpty()){
-            Toast.makeText(context, "Please enter Origin", Toast.LENGTH_SHORT).show();
+            toastIt(R.string.error_input_origin);
             return false ;
         }else if(ivfrom.getVisibility() == View.VISIBLE){
-            Toast.makeText(context,"Origin not found",Toast.LENGTH_SHORT).show();
+            toastIt(R.string.error_origin_unknown);
             return false;
         }else if(to.isEmpty()){
-            Toast.makeText(context,"Please enter Destination",Toast.LENGTH_SHORT).show();
+            toastIt(R.string.error_input_destination);
             return false ;
         }else if(ivto.getVisibility() == View.VISIBLE){
-            Toast.makeText(context,"Destination not found",Toast.LENGTH_SHORT).show();
+            toastIt(R.string.error_destination_unknown);
             return false ;
         }else if(from.equalsIgnoreCase(to)){
-            Toast.makeText(context,"You are at destination already ",Toast.LENGTH_SHORT).show();
+            toastIt(R.string.error_input_same);
             return false ;
         }else {
             return true ;
         }
     }
 
+    private void toastIt(int message){
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
 
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        if(flag==start+count+before) return ;
+        View view ;
+        if(actvfrom.isFocused()) view = ivfrom ;
+        else view = ivto ;
+        if(start==0 ) {
+            view.setVisibility(View.GONE);
+        } else {
+            view.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
 }
