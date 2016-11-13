@@ -65,9 +65,20 @@
         android:layout_height="match_parent"
         android:layout_below="@id/sliding_tabs"
         android:background="@drawable/green_at_ground"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_above="@+id/adViewMain"
+        />
 
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        >
 
+    </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

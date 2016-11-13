@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 import io.github.yesalam.bhopalbrts.R;
@@ -21,6 +23,7 @@ public class Bhopal_BRTS extends AppCompatActivity {
     ViewPager viewPager ;
     TabPagerAdapter tabPagerAdapter;
     TabLayout tabLayout;
+    AdView mAdView ;
 
 
 
@@ -31,7 +34,7 @@ public class Bhopal_BRTS extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-
+        mAdView = (AdView) findViewById(R.id.adViewMain) ;
 
         // Create the adapter that will return a fragment for each of the four
         // primary sections of the activity.
@@ -42,6 +45,8 @@ public class Bhopal_BRTS extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
 
+        AdRequest adRequest = new AdRequest.Builder().build() ;
+        mAdView.loadAd(adRequest);
     }
 
     @Override
