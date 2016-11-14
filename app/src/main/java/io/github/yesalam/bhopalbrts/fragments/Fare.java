@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -168,14 +169,7 @@ public class Fare extends Fragment implements View.OnClickListener,TextWatcher {
                 String to = actvto.getText().toString() ;
                 if(isInputValid(from,to))
                 {
-                    Calculator calci = new Calculator(from,to, getContext());
-                    calci.calc();
-                    String fare =  calci.getFare()+"" ;
-                    String via = calci.getRoute();
-                    viaholder.setVisibility(View.VISIBLE);
-                    //TODO Set the route also so that user can know fare for which route is shown bellow.
-                    fareamount.setText(fare);
-                    viaholder.setText(via);
+                    new FetchFare().execute(from,to) ;
                 }
 
                 break;
@@ -260,5 +254,27 @@ public class Fare extends Fragment implements View.OnClickListener,TextWatcher {
     @Override
     public void afterTextChanged(Editable s) {
 
+    }
+
+
+    private class FetchFare extends AsyncTask<String,Void,String> {
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            viaholder.setVisibility(View.VISIBLE);
+            String[] result = s.split(" ");
+            fareamount.setText(result[0]);
+            viaholder.setText(result[1]);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            Calculator calci = new Calculator(params[0],params[1], getContext());
+            calci.calc();
+            String fare =  Float.toString(calci.getFare()) ;
+            String via = calci.getRoute();
+            return fare+" "+via;
+
+        }
     }
 }
