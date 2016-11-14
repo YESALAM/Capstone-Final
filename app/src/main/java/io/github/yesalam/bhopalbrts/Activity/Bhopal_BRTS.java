@@ -15,11 +15,15 @@ import com.google.android.gms.ads.MobileAds;
 
 import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.adapter.TabPagerAdapter;
+import io.github.yesalam.bhopalbrts.util.Util;
+
+import static android.content.Intent.ACTION_SEND;
+import static android.content.Intent.EXTRA_TEXT;
 
 public class Bhopal_BRTS extends AppCompatActivity {
 
     private final String LOG_TAG = Bhopal_BRTS.class.getSimpleName();
-    private final String PREFERENCE_NAME = "apppreference" ;
+
     ViewPager viewPager ;
     TabPagerAdapter tabPagerAdapter;
     TabLayout tabLayout;
@@ -70,43 +74,14 @@ public class Bhopal_BRTS extends AppCompatActivity {
             return true;
         } else if(id== R.id.action_share){
             Intent localIntent1 = new Intent();
-            localIntent1.setAction("android.intent.action.SEND");
-            localIntent1.putExtra("android.intent.extra.TEXT", "Bhopal BRTS is a must have app for MYBUS commuter and Bhopal tourist .\nJust click on the link given below:\nhttps://play.google.com/store/apps/details?id=com.seatech.bhopalbrts\n Don't forget to share with your mates..");
-            localIntent1.setType("text/plain");
-            startActivity(Intent.createChooser(localIntent1, "Share via:"));
+            localIntent1.setAction(ACTION_SEND);
+            localIntent1.putExtra(EXTRA_TEXT,getResources().getString(R.string.send_text));
+            localIntent1.setType(Util.PLAIN_TEXT);
+            startActivity(Intent.createChooser(localIntent1,getString(R.string.share_via)));
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-    }
 }

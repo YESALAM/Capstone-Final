@@ -94,7 +94,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
         bus_motion = (ImageView) getView().findViewById(R.id.bus_motion_view);
 
 
-        String[] from = {"stop"};
+        String[] from = {BusDataContract.STOPS.COLUMN_STOP};
         int[] to = {android.R.id.text1};
 
         adapter = new SimpleCursorAdapter(getActivity(),android.R.layout.simple_list_item_1,null,from,to);
@@ -104,7 +104,7 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
                 if (cursor == null) {
                     return "";
                 } else {
-                    final int colIndex = cursor.getColumnIndexOrThrow("stop");
+                    final int colIndex = cursor.getColumnIndexOrThrow(BusDataContract.STOPS.COLUMN_STOP);
                     String result = cursor.getString(colIndex);
                     return result;
                 }
@@ -236,12 +236,12 @@ public class Bus extends Fragment implements View.OnClickListener ,AdapterView.O
             if(requestCode == 0){
                 this.actvfrom.requestFocus();
                 this.actvfrom.setAdapter(null);
-                this.actvfrom.setText(data.getStringExtra("stop"));
+                this.actvfrom.setText(data.getStringExtra(BusDataContract.STOPS.COLUMN_STOP));
                 this.actvfrom.setAdapter(this.adapter);
             } else if(requestCode == 1){
                 this.actvto.requestFocus();
                 this.actvto.setAdapter(null);
-                this.actvto.setText(data.getStringExtra("stop"));
+                this.actvto.setText(data.getStringExtra(BusDataContract.STOPS.COLUMN_STOP));
                 this.actvto.setAdapter(this.adapter);
             }
         }

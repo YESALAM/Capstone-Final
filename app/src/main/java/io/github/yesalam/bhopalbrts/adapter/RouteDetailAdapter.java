@@ -38,13 +38,13 @@ public class RouteDetailAdapter extends ArrayAdapter<Stop> {
         TextView dh = (TextView) itemView.findViewById(R.id.distholder) ;
         ImageView icon = (ImageView) itemView.findViewById(R.id.stopicon);
         if(position == 0){
-            flag.setText("Origin");
+            flag.setText(context.getString(R.string.origin_label));
             icon.setVisibility(View.VISIBLE);
         } else if(position == stopList.size()-1){
-            flag.setText("Destination");
+            flag.setText(context.getString(R.string.destination_label));
             icon.setVisibility(View.VISIBLE);
         } else if(stopList.get(position).isJunction()){
-            flag.setText("Change Bus Here");
+            flag.setText(context.getString(R.string.changebus_label));
             icon.setVisibility(View.VISIBLE);
         }  else {
             flag.setText("");

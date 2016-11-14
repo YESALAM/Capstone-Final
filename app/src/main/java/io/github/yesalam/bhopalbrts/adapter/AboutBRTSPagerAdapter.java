@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.fragments.AboutBRTS;
 import io.github.yesalam.bhopalbrts.fragments.ContactBRTS;
 import io.github.yesalam.bhopalbrts.fragments.TandC;
@@ -16,21 +17,22 @@ public class AboutBRTSPagerAdapter extends FragmentPagerAdapter {
 
     Context context ;
 
-    public AboutBRTSPagerAdapter(FragmentManager fm){
+    public AboutBRTSPagerAdapter(FragmentManager fm,Context context){
         super(fm);
+        this.context = context ;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position){
             case 0:
-                return "About ";
+                return context.getResources().getString(R.string.about_label);
             case 1:
-                return "Contact" ;
+                return context.getResources().getString(R.string.contact_label) ;
             case 2:
-                return "Terms and Conditon";
+                return context.getResources().getString(R.string.tandc_label);
             default:
-                return "love you" ;
+                return context.getResources().getString(R.string.default_label) ;
         }
     }
 

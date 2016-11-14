@@ -10,6 +10,8 @@ import android.provider.BaseColumns;
 
 public class BusDataContract {
 
+    public static final String DB_NAME = "brtsM.db" ;
+
     public static final String CONTENT_AUTHORITY = "io.github.yesalam.bhopalbrts" ;
 
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://"+CONTENT_AUTHORITY) ;

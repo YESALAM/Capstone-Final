@@ -11,6 +11,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import io.github.yesalam.bhopalbrts.adapter.AboutBRTSPagerAdapter;
 import io.github.yesalam.bhopalbrts.R ;
+import io.github.yesalam.bhopalbrts.util.Util;
 
 /**
  * Created by yesalam on 22-08-2015.
@@ -26,8 +27,8 @@ public class AboutBRTS extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_brts);
-        int id = getIntent().getIntExtra("_id",0);
-        pagerAdapter = new AboutBRTSPagerAdapter(getSupportFragmentManager());
+        int id = getIntent().getIntExtra(Util.ID,0);
+        pagerAdapter = new AboutBRTSPagerAdapter(getSupportFragmentManager(),this);
         viewPager = (ViewPager) findViewById(R.id.about_brts_pager);
 
         viewPager.setAdapter(pagerAdapter);

@@ -85,7 +85,6 @@ public class WidgetDataService extends RemoteViewsService {
                 fillInIntent.putExtra(Util.BUS,name) ;
                 fillInIntent.putExtra(Util.ORIGIN,leafs[0]) ;
                 fillInIntent.putExtra(Util.DESTINATION,leafs[1]);
-                // fillInIntent.setData(weatherUri);
                 remoteViews.setOnClickFillInIntent(R.id.list_route_fragment_wrapper, fillInIntent);
             }
 

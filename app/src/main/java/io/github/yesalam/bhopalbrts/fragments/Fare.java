@@ -97,7 +97,7 @@ public class Fare extends Fragment implements View.OnClickListener,TextWatcher {
         farerupee.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/rupee.ttf"));
         farerupee.setText("`");
 
-        String[] from = {"stop"};
+        String[] from = {BusDataContract.STOPS.COLUMN_STOP};
         int[] to = {android.R.id.text1};
 
         adapter = new SimpleCursorAdapter(getActivity(),android.R.layout.simple_list_item_1,null,from,to);
@@ -107,7 +107,7 @@ public class Fare extends Fragment implements View.OnClickListener,TextWatcher {
                 if(cursor == null){
                     return "" ;
                 } else {
-                    final int colIndex = cursor.getColumnIndexOrThrow("stop");
+                    final int colIndex = cursor.getColumnIndexOrThrow(BusDataContract.STOPS.COLUMN_STOP);
                     return cursor.getString(colIndex);
                 }
 
@@ -152,7 +152,6 @@ public class Fare extends Fragment implements View.OnClickListener,TextWatcher {
 
     @Override
     public void onClick(View v) {
-        // ((InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
         switch (v.getId()){
             case R.id.farebuttonFindRouteFrom :
 
@@ -167,7 +166,6 @@ public class Fare extends Fragment implements View.OnClickListener,TextWatcher {
                 ((InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
                 String from = actvfrom.getText().toString() ;
                 String to = actvto.getText().toString() ;
-                //Chech the validity of input strings .
                 if(isInputValid(from,to))
                 {
                     Calculator calci = new Calculator(from,to, getContext());
@@ -182,11 +180,9 @@ public class Fare extends Fragment implements View.OnClickListener,TextWatcher {
 
                 break;
             case R.id.fareimageViewCancleFrom :
-                //Clear the autoCompleteTextViewFindRouteFrom
                 actvfrom.setText("");
                 break;
             case R.id.fareimageViewCancleTo :
-                //Clear the autoCompleteTextViewFindRouteTo
                 actvto.setText("");
                 break;
             default:
@@ -202,12 +198,12 @@ public class Fare extends Fragment implements View.OnClickListener,TextWatcher {
             if(requestCode == 0){
                 this.actvfrom.requestFocus();
                 this.actvfrom.setAdapter(null);
-                this.actvfrom.setText(data.getStringExtra("stop"));
+                this.actvfrom.setText(data.getStringExtra(BusDataContract.STOPS.COLUMN_STOP));
                 this.actvfrom.setAdapter(this.adapter);
             } else if(requestCode == 1){
                 this.actvto.requestFocus();
                 this.actvto.setAdapter(null);
-                this.actvto.setText(data.getStringExtra("stop"));
+                this.actvto.setText(data.getStringExtra(BusDataContract.STOPS.COLUMN_STOP));
                 this.actvto.setAdapter(this.adapter);
             }
         }

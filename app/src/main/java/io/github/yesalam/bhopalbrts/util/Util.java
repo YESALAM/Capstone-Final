@@ -22,6 +22,9 @@ public class Util {
     public static String JUNCTION = "JUNCTION" ;
     public static String BUS = "BUS" ;
     public static String FARE = "FARE" ;
+    public static String ID = "_id" ;
+    public static String PLAIN_TEXT = "text/plain" ;
+    public static String TR4AC = "TR4AC" ;
 
 
 

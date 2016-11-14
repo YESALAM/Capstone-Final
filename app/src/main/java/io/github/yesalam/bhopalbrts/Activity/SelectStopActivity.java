@@ -32,11 +32,11 @@ import com.google.android.gms.location.LocationServices;
 import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.data.BusDataContract;
 import io.github.yesalam.bhopalbrts.datamodel.Stop;
-import io.github.yesalam.bhopalbrts.data.AssetDatabaseHelper;
-
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import static android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS;
 
 /**
  * Created by yesalam on 22-08-2015.
@@ -48,7 +48,6 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
     ListView listView;
     SimpleCursorAdapter adapter;
     Cursor cursor;
-    //AssetDatabaseHelper dbHelper;
     ImageView gpsbutton ;
     LocationManager manager ;
     ArrayList<Stop> dataset;
@@ -58,18 +57,12 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
     GoogleApiClient mGoogleApiClient ;
     LocationRequest mLocationRequest ;
 
-    @Override
-    protected void onPause() {
-        Log.e(LOG_TAG, "Activity Paused");
-        super.onPause();
 
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_stop);
-        //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
@@ -85,15 +78,13 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
         editText.addTextChangedListener(this);
         listView.setOnItemClickListener(this);
 
-        String[] from = {"stop","vicinity"};
+        String[] from = {BusDataContract.STOPS.COLUMN_STOP,BusDataContract.STOPS.COLUMN_VICINITY};
         int[] to ={android.R.id.text1,android.R.id.text2};
-        //dbHelper = AssetDatabaseHelper.getDatabaseHelper(this);
-        //String sql = "select _id,stop,vicinity from allstops where stop like '"+constrain+"%'" ;
         String[] projectionn = {BusDataContract.STOPS._ID,BusDataContract.STOPS.COLUMN_STOP,BusDataContract.STOPS.COLUMN_VICINITY} ;
         String selection = "stop like ?" ;
         String[] selectionArgs = {""} ;
         cursor = getContentResolver().query(BusDataContract.STOPS.buildStopqueryUri(""),projectionn,selection,selectionArgs,null) ;
-        //cursor = dbHelper.getAllStops("");
+
 
         adapter = new SimpleCursorAdapter(this,android.R.layout.simple_list_item_2,cursor,from,to);
 
@@ -135,9 +126,7 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        //cursor = dbHelper.query(s);
-        String[] projectionin = {"_id","stop","vicinity"};
+        String[] projectionin = {BusDataContract.STOPS._ID,BusDataContract.STOPS.COLUMN_STOP,BusDataContract.STOPS.COLUMN_VICINITY};
         String selection = "stop like "+"'"+s+"%'"+" or stop like '%"+s+"%'"+"or vicinity like "+"'%"+s+"%'";
         cursor = getContentResolver().query(BusDataContract.STOPS.buildStopqueryUri(s.toString()),projectionin,selection,null,null) ;
         adapter.swapCursor(cursor);
@@ -172,7 +161,7 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
 
     private  void finishThis(String stop){
         Intent localIntent = new Intent();
-        localIntent.putExtra("stop", stop);
+        localIntent.putExtra(BusDataContract.STOPS.COLUMN_STOP, stop);
         this.setResult(-1, localIntent);
         this.finish();
     }
@@ -190,7 +179,7 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
                     return;
                 }
                 dialog = new ProgressDialog(this);
-                dialog.setMessage("Getting your Location....");
+                dialog.setMessage(getString(R.string.getting_location));
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
                 if(mGoogleApiClient.isConnected()){
@@ -207,7 +196,7 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
 
     public void createGpsDisabledAlert(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Your Location is disabled! Would you like to enable it?").setCancelable(false).setPositiveButton("Enable Location", new DialogInterface.OnClickListener(){
+        builder.setMessage(getString(R.string.disable_location_message)).setCancelable(false).setPositiveButton(getString(R.string.enable_location), new DialogInterface.OnClickListener(){
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -216,7 +205,7 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
         });
 
 
-        builder.setNegativeButton("Do nothing", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.do_nothing), new DialogInterface.OnClickListener() {
 
 
             public void onClick(DialogInterface dialog, int id) {
@@ -229,16 +218,14 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
     }
 
     private void showGpsOptions() {
-        Intent gpsOptionsIntent = new Intent("android.settings.LOCATION_SOURCE_SETTINGS");
+        Intent gpsOptionsIntent = new Intent(ACTION_LOCATION_SOURCE_SETTINGS);
         startActivity(gpsOptionsIntent);
     }
 
     public void getNearestStopList(double currentLatitude,double currentLongitude)  {
         dataset = new ArrayList<>();
-        //Cursor cursor1 = dbHelper.getMain();
         Cursor cursor1 = getContentResolver().query(BusDataContract.STOPS.BASE_URI,null,null,null,null) ;
         while (cursor1.moveToNext()){
-            Log.i(LOG_TAG,"Into while");
             float[] result = new float[1];
             double  lst_lat = cursor1.getDouble(2);
             double  lst_lng = cursor1.getDouble(1);
@@ -248,9 +235,7 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
             double dist = result[0]/1000;
             String distpercise = String.format("%.2f",dist);
             float distance = Float.parseFloat(distpercise);
-            Log.i(LOG_TAG,"Dist is " + distance);
             if(distance<3.0){
-                Log.e(LOG_TAG,"Minimum dist"+distance);
                 String stopname = cursor1.getString(0);
                 Stop temp = new Stop(stopname,distance);
                 dataset.add(temp);
@@ -274,8 +259,7 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
                 String stopname = dataset.get(0).getStop();
                 finishThis(stopname);
             } else {
-                Log.i(LOG_TAG,"Location is "+currentLatitude+" "+currentLongitude);
-                Toast.makeText(this,"NO Stop Found",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,R.string.no_stops_message,Toast.LENGTH_SHORT).show();
             }
             manager.removeUpdates(this);
         }
@@ -310,17 +294,17 @@ public class SelectStopActivity extends AppCompatActivity implements TextWatcher
     @Override
     public void onConnectionSuspended(int i) {
         if(i== GoogleApiClient.ConnectionCallbacks.CAUSE_NETWORK_LOST){
-            Toast.makeText(this,"Network Lost",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.network_lost,Toast.LENGTH_SHORT).show();
         }
         if(i== GoogleApiClient.ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED){
-            Toast.makeText(this,"Service disconnected",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.google_service_disconnect,Toast.LENGTH_SHORT).show();
         }
-        Log.i(LOG_TAG, "GoogleApiClient connection has been suspend");
+
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Log.i(LOG_TAG, "GoogleApiClient connection has failed");
+
     }
 }
 

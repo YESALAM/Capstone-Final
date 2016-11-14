@@ -30,7 +30,6 @@ public class DataProvider extends ContentProvider {
     static final int JUNCTION_FROM_ROUTE = 200 ;
     static final int ID_WITH_STOP_NAME = 201 ;
     static final int ALL_BW_IDS = 202 ;
-    //static final int ALL_WITH_IDS = 203 ;
     static final int ALL_ROUTES = 301 ;
 
 
@@ -136,7 +135,6 @@ public class DataProvider extends ContentProvider {
                         null,
                         null
                 );
-                Log.e("ContentProvider",retCursor.toString()) ;
                 break;
             case ALL_ROUTES:
                 String[] columns = {BusDataContract.ALLROUTES._ID,BusDataContract.ALLROUTES.COLUMN_NAME,BusDataContract.ALLROUTES.COLUMN_ENDS,BusDataContract.ALLROUTES.COLUMN_STOP_COUNT} ;
@@ -173,10 +171,7 @@ public class DataProvider extends ContentProvider {
                 return BusDataContract.STOPS.CONTENT_ITEM_TYPE ;
             case STOPS_WITH_QUERY :
                 return BusDataContract.STOPS.CONTENT_TYPE ;
-           /* case STOPS_AND_VICINITY_WITH_QUERY :
-                return BusDataContract.STOPS.CONTENT_TYPE ;*/
-
-            case JUNCTION_FROM_ROUTE :
+          case JUNCTION_FROM_ROUTE :
                 return BusDataContract.ROUTE.CONTENT_TYPE ;
             case ID_WITH_STOP_NAME :
                 return BusDataContract.ROUTE.CONTENT_ITEM_TYPE ;

@@ -1,9 +1,12 @@
 package io.github.yesalam.bhopalbrts.adapter;
 
+import android.content.ContentProvider;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import io.github.yesalam.bhopalbrts.R;
 import io.github.yesalam.bhopalbrts.fragments.AboutUs;
 import io.github.yesalam.bhopalbrts.fragments.ContactUs;
 import io.github.yesalam.bhopalbrts.fragments.ThankU;
@@ -12,21 +15,24 @@ import io.github.yesalam.bhopalbrts.fragments.ThankU;
  * Created by yesalam on 22-08-2015.
  */
 public class AboutDevelopersPagerAdapter extends FragmentPagerAdapter {
-    public AboutDevelopersPagerAdapter(FragmentManager fm){
+    private Context context ;
+
+    public AboutDevelopersPagerAdapter(FragmentManager fm,Context context){
         super(fm);
+        this.context = context ;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position){
             case 0:
-                return "About us" ;
+                return context.getResources().getString(R.string.aboutus_label) ;
             case 1:
-                return "Contact us" ;
+                return context.getResources().getString(R.string.contactus_label) ;
             case 2:
-                return "Thank you" ;
+                return context.getResources().getString(R.string.thanku_label) ;
             default:
-                return "Love you" ;
+                return context.getResources().getString(R.string.default_label) ;
         }
     }
 

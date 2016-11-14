@@ -98,5 +98,27 @@
 
 
     <string name="brts_widget">BRTS Route</string>
+    <string name="about_label" >About</string>
+    <string name="contact_label">Contact</string>
+    <string name="tandc_label">Terms and Condition</string>
+    <string name="default_label">Love you</string>
+    <string name="aboutus_label">About us</string>
+    <string name="contactus_label">Contact us</string>
+    <string name="thanku_label">Thank you</string>
+    <string name="send_text">Bhopal BRTS is a must have app for MYBUS commuter and Bhopal tourist .\nJust click on the link given below:\nhttps://play.google.com/store/apps/details?id=com.seatech.bhopalbrts\n Don\'t forget to share with your mates..</string>
+    <string name="share_via">Share via:</string>
+    <string name="tel_indicator">tel:</string>
+    <string name="routedetail_label">Route Detail</string>
+    <string name="routemap_label">Route Map</string>
+    <string name="origin_label">Origin</string>
+    <string name="destination_label">Destination</string>
+    <string name="changebus_label">Change Bus Here</string>
+    <string name="getting_location">Getting your Location....</string>
+    <string name="disable_location_message">Your Location is disabled! Would you like to enable it?</string>
+    <string name="enable_location">Enable Location</string>
+    <string name="do_nothing">Do Nothing</string>
+    <string name="no_stops_message">No Stop Found</string>
+    <string name="network_lost">Network Lost</string>
+    <string name="google_service_disconnect">Google Service Disconnected</string>
 
 </resources>

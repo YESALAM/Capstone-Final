@@ -48,12 +48,12 @@ public class ContactBRTS extends Fragment {
 
         office_brts.setText(Html.fromHtml(getString(R.string.brts_office)));
 
-        Linkify.addLinks(local_police, Pattern.compile("100"), "tel:");
+        Linkify.addLinks(local_police, Pattern.compile("100"), getString(R.string.tel_indicator));
 
-        Linkify.addLinks(woman_helpline, Pattern.compile("\\d{4}"),"tel:" );
-        Linkify.addLinks(cm_helpline, Pattern.compile("\\d{3}"),"tel:" );
-        Linkify.addLinks(emenrgency_response, Pattern.compile("\\d{3}"),"tel:" );
-        Linkify.addLinks(railway_enquiry, Pattern.compile("\\d{3}"),"tel:" );
+        Linkify.addLinks(woman_helpline, Pattern.compile("\\d{4}"),getString(R.string.tel_indicator) );
+        Linkify.addLinks(cm_helpline, Pattern.compile("\\d{3}"),getString(R.string.tel_indicator) );
+        Linkify.addLinks(emenrgency_response, Pattern.compile("\\d{3}"),getString(R.string.tel_indicator));
+        Linkify.addLinks(railway_enquiry, Pattern.compile("\\d{3}"),getString(R.string.tel_indicator) );
 
 
 

@@ -28,8 +28,6 @@ import java.util.ArrayList;
 public class RouteDetail extends Fragment implements AdapterView.OnItemClickListener {
     private final String LOG_TAG = RouteDetail.class.getSimpleName() ;
     ListView listView ;
-    //AssetDatabaseHelper dbHelper;
-    ArrayList<Stop> stopList ;
     ShowInfoListener showInfoListener;
     ReadynessListener readynessListener ;
     View view;
@@ -82,7 +80,6 @@ public class RouteDetail extends Fragment implements AdapterView.OnItemClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.e(LOG_TAG, "Item clicked");
         showInfoListener.showInfo(position);
     }
 
@@ -95,7 +92,6 @@ public class RouteDetail extends Fragment implements AdapterView.OnItemClickList
             showInfoListener = (ShowInfoListener) activity;
             readynessListener = (ReadynessListener) activity;
         } catch (ClassCastException e) {
-            Log.e(LOG_TAG,"Activity should implement interface");
             throw new ClassCastException(activity.toString()
                     + " must implement ShowInfoListener");
         }

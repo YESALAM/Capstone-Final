@@ -10,6 +10,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import io.github.yesalam.bhopalbrts.adapter.AboutDevelopersPagerAdapter;
 import io.github.yesalam.bhopalbrts.R ;
+import io.github.yesalam.bhopalbrts.util.Util;
 
 /**
  * Created by yesalam on 22-08-2015.
@@ -25,12 +26,12 @@ public class AboutDevloper extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_devloper);
 
-        pagerAdapter = new AboutDevelopersPagerAdapter(getSupportFragmentManager());
+        pagerAdapter = new AboutDevelopersPagerAdapter(getSupportFragmentManager(),this);
         viewPager = (ViewPager) findViewById(R.id.about_developer_pager);
 
         viewPager.setAdapter(pagerAdapter);
 
-        int id = getIntent().getIntExtra("_id",0);
+        int id = getIntent().getIntExtra(Util.ID,0);
         switch (id){
             case 4:
                 viewPager.setCurrentItem(0);

@@ -127,13 +127,13 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
                         .position(new LatLng(stop.getLattitude(), stop.getLongitude())).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place_white_24dp));
             }
             if (i == 0)
-                optionses[i].snippet("Origin of journey").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp));
+                optionses[i].snippet(getString(R.string.origin_label)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp));
             if (stop.isJunction()) {
-                optionses[i].snippet("Change your buse here").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp));
+                optionses[i].snippet(getString(R.string.changebus_label)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp));
                 junction_stop = i;
             }
             if (i == stoplist.size() - 1)
-                optionses[i].snippet("Destination of your journey").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp));
+                optionses[i].snippet(getString(R.string.destination_label)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp));
 
             i++;
         }

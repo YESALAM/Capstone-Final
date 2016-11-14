@@ -45,14 +45,13 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
     String to ;
     String bus ;
     int flag = 0 ;
-    Cursor cursor ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_detail);
         initialize();
-        pagerAdapter = new RouteActivityPagerAdapter(getSupportFragmentManager(),stoplist) ;
+        pagerAdapter = new RouteActivityPagerAdapter(getSupportFragmentManager(),stoplist,this) ;
         viewPager = (ViewPager) findViewById(R.id.routepager) ;
         viewPager.setAdapter(pagerAdapter);
     }
@@ -219,11 +218,7 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
         ArrayList<Stop> result = new ArrayList<>() ;
         int temp = -1 ;
         float pre = 0 ;
-       /* if(startid>stopid) {
-            temp = startid ;
-            startid = stopid ;
-            stopid = temp ;
-        }*/
+
 
 
         if(startid>stopid) {
@@ -238,8 +233,7 @@ public class RouteDetailActivity extends AppCompatActivity implements ShowInfoLi
                 stop.setLongitude(Double.parseDouble(cursor.getString(1)));
                 float dist = cursor.getFloat(3);
 
-                //float floatdist = Util.twoDigitPrecision(dist);
-                //conversion complete
+
                 //TODO chane equation after database updation .
 
                 if(pre == 0)  {

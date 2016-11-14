@@ -18,6 +18,7 @@ import io.github.yesalam.bhopalbrts.Activity.AboutBRTS;
 import io.github.yesalam.bhopalbrts.Activity.AboutDevloper;
 import io.github.yesalam.bhopalbrts.Activity.Bhopal_BRTS;
 import io.github.yesalam.bhopalbrts.R;
+import io.github.yesalam.bhopalbrts.util.Util;
 
 /**
  * This fragment show the other detail about the app and the developer .
@@ -25,8 +26,6 @@ import io.github.yesalam.bhopalbrts.R;
 public class More extends Fragment implements View.OnClickListener {
 
     private final String LOG_TAG = More.class.getSimpleName();
-    private final String ID = "_id" ;
-    SharedPreferences setting ;
     Bhopal_BRTS activity ;
     TextView bhopal_brts;
     TextView contact_brts;
@@ -45,8 +44,6 @@ public class More extends Fragment implements View.OnClickListener {
 
     @Override
     public void onStart() {
-        //setting = activity.setting ;
-        //setting.edit().putInt("tab_id",4).commit();
         super.onStart();
         initialize();
     }
@@ -86,45 +83,39 @@ public class More extends Fragment implements View.OnClickListener {
         int id = v.getId();
         switch (id){
             case R.id.bhopal_brts:
-                //TODO
                 intent = new Intent(getActivity(), AboutBRTS.class);
-                intent.putExtra(ID, 1);
+                intent.putExtra(Util.ID, 1);
                 startActivity(intent);
 
                 break;
             case R.id.contact_brts:
-                //TODO
                 intent = new Intent(getActivity(), AboutBRTS.class);
-                intent.putExtra(ID, 2);
+                intent.putExtra(Util.ID, 2);
                 startActivity(intent);
 
                 break;
             case R.id.tandc:
-                //TODO
                 intent = new Intent(getActivity(), AboutBRTS.class);
-                intent.putExtra(ID, 3);
+                intent.putExtra(Util.ID, 3);
                 startActivity(intent);
 
                 break;
             case R.id.about_us:
-                //TODO
                 intent = new Intent(getActivity(), AboutDevloper.class);
-                intent.putExtra(ID, 4);
+                intent.putExtra(Util.ID, 4);
                 startActivity(intent);
 
                 break;
             case R.id.contact_us:
-                //TODO
                 intent = new Intent(getActivity(), AboutDevloper.class);
-                intent.putExtra(ID, 5);
+                intent.putExtra(Util.ID, 5);
                 startActivity(intent);
 
                 break;
 
             case R.id.thanku:
-                //TODO
                 intent = new Intent(getActivity(), AboutDevloper.class);
-                intent.putExtra(ID, 6);
+                intent.putExtra(Util.ID, 6);
                 startActivity(intent);
 
                 break;
