@@ -68,7 +68,7 @@
                     android:layout_height="30.0dip"
                     android:layout_marginLeft="8.0dip"
                     android:layout_toRightOf="@id/fareautoCompleteTextViewFindRouteFrom"
-
+                    android:contentDescription="@string/findfare"
                     style="?android:attr/buttonStyleSmall" />
             </TableRow>
 

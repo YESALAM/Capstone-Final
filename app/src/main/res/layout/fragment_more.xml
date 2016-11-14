@@ -35,7 +35,7 @@
                     android:text="Bhopal BRTS"
                     style="@style/AboutTextItem"
                     android:id="@+id/bhopal_brts"
-
+                    android:contentDescription="@string/about_bhopal_brts"
                     />
                 <View
 
@@ -49,6 +49,7 @@
                     android:text="Contact"
                     style="@style/AboutTextItem"
                     android:id="@+id/contact_brts"
+                    android:contentDescription="@string/contact_brts"
 
                     />
                 <View
@@ -63,7 +64,7 @@
                     android:text="Terms and Conditions"
                     style="@style/AboutTextItem"
                     android:id="@+id/tandc"
-
+                    android:contentDescription="@string/viewtandc"
                     />
                 <View
 
@@ -91,6 +92,7 @@
                     android:text="About us"
                     style="@style/AboutTextItem"
                     android:id="@+id/about_us"
+                    android:contentDescription="@string/about_developers"
                     />
                 <View
                     android:id="@+id/divider"
@@ -104,6 +106,7 @@
                     android:text="Contact us"
                     style="@style/AboutTextItem"
                     android:id="@+id/contact_us"
+                    android:contentDescription="@string/contact_developers"
                     />
                 <View
 

@@ -120,5 +120,12 @@
     <string name="no_stops_message">No Stop Found</string>
     <string name="network_lost">Network Lost</string>
     <string name="google_service_disconnect">Google Service Disconnected</string>
+    <string name="findroute">Find route button</string>
+    <string name="findfare">Find fare button</string>
+    <string name="about_bhopal_brts">About Bhopal BRTS</string>
+    <string name="contact_brts">Contact BRTS</string>
+    <string name="viewtandc">View Terms and Condition</string>
+    <string name="about_developers">About Developers</string>
+    <string name="contact_developers">Contact Developers</string>
 
 </resources>

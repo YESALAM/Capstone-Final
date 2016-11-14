@@ -67,7 +67,7 @@
                     android:layout_height="30.0dip"
                     android:layout_marginLeft="8.0dip"
                     android:layout_toRightOf="@id/autoCompleteTextViewFindRouteFrom"
-
+                    android:contentDescription="@string/findroute"
                     style="?android:attr/buttonStyleSmall" />
             </TableRow>
 
