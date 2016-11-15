@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Bhopal BRTS</string>
+    <string name="version">version 1.1.1 (Naina)</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
@@ -27,7 +28,7 @@
     <string name="title_activity_about_brts">About BRTS</string>
     <string name="title_activity_about_devloper">About Devlopers</string>
     <string name="action_share">Share App</string>
-    <string name="local_police">tel:100</string>
+    <string name="local_police">100</string>
     <string name="about_us_detail">We are group of  students with common motive to solve common problem with the help of technology (Praudyogiki aka Jugad) available .  </string>
     <string name="bhopal_brts_detail">
         <![CDATA[
@@ -100,7 +101,7 @@
     <string name="brts_widget">BRTS Route</string>
     <string name="about_label" >About</string>
     <string name="contact_label">Contact</string>
-    <string name="tandc_label">Terms and Condition</string>
+    <string name="tc_label">Terms and Condition</string>
     <string name="default_label">Love you</string>
     <string name="aboutus_label">About us</string>
     <string name="contactus_label">Contact us</string>
@@ -127,5 +128,35 @@
     <string name="viewtandc">View Terms and Condition</string>
     <string name="about_developers">About Developers</string>
     <string name="contact_developers">Contact Developers</string>
+    <string name="select_stop">Select Stop from a list</string>
+    <string name="km_label">Km.</string>
+    <string name="rupay_sign">`</string>
+    <string name="group_name">SeATech</string>
+    <string name="slogan">Pragat Praudyogiki Samooh</string>
+    <string name="brand_image">BRTS brand image</string>
+    <string name="emergency_label">Emergency Nos</string>
+    <string name="service_label">Services</string>
+    <string name="telephone_label">Telephone</string>
+    <string name="local_police_label">Local Police</string>
+    <string name="woman_helpline_label">Woman Helpline</string>
+    <string name="woman_helpline">1090</string>
+    <string name="cm_helpline_label">CM Helpline</string>
+    <string name="cm_helpline">181</string>
+    <string name="railway_enquiry_label">Railway Enquiry</string>
+    <string name="railway_enquiry">131</string>
+    <string name="emergency_response_label">Emergency response Services for\nMedical, Fire Brigade and Police</string>
+    <string name="emergency_response">108</string>
+    <string name="helpline_bcll_label">Helpline NOs - BCLL</string>
+    <string name="mybus_helpline_label">MY Bus Helpline</string>
+    <string name="mybus_helpline1">+917553199966</string>
+    <string name="mybus_helpline2">+917554074843</string>
+    <string name="charted_bus_label">Chartered Bus(Volvo)</string>
+    <string name="charted_bus_helpline">+919993288888</string>
+    <string name="my_cab_label">My Cab(City Taxi Services)</string>
+    <string name="my_cab_helpline">+917556666666</string>
+    <string name="office_loaction_label">Office Location</string>
+    <string name="developer_name">Sadar-e-Alam</string>
+    <string name="developer_post">Lead Programmer</string>
+
 
 </resources>

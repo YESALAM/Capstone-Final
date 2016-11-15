@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/state_selector_list"
     android:id="@+id/list_route_fragment_wrapper"
     android:padding="5dp">
-<!--    android:background="@drawable/state_selector_list"-->
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SR786"
+        tools:text="SR786"
         android:id="@+id/route_id"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -23,7 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BagSewaniya to Bhopal"
+        tools:text="BagSewaniya to Bhopal"
         android:id="@+id/route_leafs"
         android:layout_below="@+id/route_id"
         android:layout_alignParentLeft="true"
@@ -35,7 +37,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="25 Stops"
+        tools:text="25 Stops"
         android:id="@+id/route_stop_no"
         android:textSize="17sp"
         android:textColor="#bbbbbb"

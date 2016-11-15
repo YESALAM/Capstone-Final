@@ -67,7 +67,7 @@
                     android:layout_height="30.0dip"
                     android:layout_marginLeft="8.0dip"
                     android:layout_toRightOf="@id/autoCompleteTextViewFindRouteFrom"
-                    android:contentDescription="@string/findroute"
+                    android:contentDescription="@string/select_stop"
                     style="?android:attr/buttonStyleSmall" />
             </TableRow>
 
@@ -117,6 +117,7 @@
                     android:layout_height="30.0dip"
                     android:layout_marginLeft="8.0dip"
                     android:layout_toRightOf="@id/autoCompleteTextViewFindRouteTo"
+                    android:contentDescription="@string/select_stop"
                     style="?android:attr/buttonStyleSmall" />
             </TableRow>
 
@@ -131,6 +132,7 @@
                     android:layout_below="@id/tableRowTo"
                     style="@style/ButtonMtr"
                     android:elevation="10dp"
+                    android:contentDescription="@string/findroute"
                     />
             </RelativeLayout>
             <View
@@ -139,13 +141,13 @@
                 android:paddingTop="8.0dip"
                 android:layout_width="fill_parent"
                 android:layout_height="2.0dip"
-                android:layout_below="@id/input_area" />
+                />
 
 
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/divider"
+
                 android:id="@+id/myrecycleview"
                 android:scrollbars="vertical"
                 android:layout_marginTop="5dp"
@@ -166,7 +168,9 @@
             android:id="@+id/bus_motion_view"
             android:src="@drawable/bus_motion"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/brand_image"
+            />
     </RelativeLayout>
 
 

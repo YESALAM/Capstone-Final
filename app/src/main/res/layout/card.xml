@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,8 +10,7 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingTop="5dp"
-    android:paddingBottom="5dp"
-    >
+    android:paddingBottom="5dp">
     <!--android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingTop="5dp"
@@ -42,10 +42,9 @@
                 android:id="@+id/busesTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fake buses"
+                tools:text="Fake buses"
                 android:textStyle="bold"
                 android:textSize="20sp"
-
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
 
@@ -55,7 +54,6 @@
                android:layout_height="wrap_content"
                android:orientation="horizontal"
                android:layout_below="@id/busesTextView"
-
                android:id="@+id/wraperlayout"
                >
 
@@ -66,14 +64,14 @@
                    android:layout_height="wrap_content"
                    android:textSize="18sp"
                    android:textStyle="normal"
-                   android:text="Bag Sewaniya  mp nagar"
+                   tools:text="Bag Sewaniya  mp nagar"
 
                     />
                <TextView
                    android:id="@+id/totext"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="To"
+                   tools:text="To"
                    android:textSize="18sp"
                    android:textStyle="normal"
                    android:layout_marginLeft="10dp"
@@ -84,7 +82,7 @@
                    android:layout_width="wrap_content"
                    android:layout_weight="1"
                    android:layout_height="wrap_content"
-                   android:text="Bag Sewaniya Extentsion"
+                   tools:text="Bag Sewaniya Extentsion"
                    android:layout_marginLeft="10dp"
                    android:textSize="18sp"
                    android:textStyle="normal"
@@ -98,7 +96,7 @@
                 android:id="@+id/distValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1.5"
+                tools:text="1.5"
                 android:layout_below="@id/wraperlayout"
                 android:textSize="18sp"
 
@@ -107,7 +105,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Km."
+                android:text="@string/km_label"
                 android:textColor="@android:color/darker_gray"
                 android:id="@+id/textView"
                 android:textSize="18sp"
@@ -121,10 +119,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/fareValue"
-                android:text="15"
+                tools:text="15"
                 android:textSize="18sp"
-
-
                 android:layout_alignTop="@id/distValue"
                 android:layout_toLeftOf="@+id/rupeeSymbol"
                 android:layout_marginRight="10dp"
@@ -134,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/rupeeSymbol"
-                android:text="`"
+                tools:text="@string/rupay_sign"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/darker_gray"

@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
+//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -76,27 +76,20 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
     public void onStart() {
         super.onStart();
         if (map == null) {
-            //map = supportMapFragment.getMap();
-            // Log.e(LOG_TAG,map.toString());
+
             supportMapFragment.getMapAsync(this);
-           /*if(map!=null){
-               setupMap();
-           }*/
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v;
-        //v = inflater.inflate(R.layout.fragment_route_map,container,false);
+
         v = inflater.inflate(R.layout.fragment_route_map_legacy, container, false);
         // Gets the MapView from the XML layout and creates it
-        //mapView = (MapView) v.findViewById(R.id.mapview);
-        // mapView.onCreate(savedInstanceState);
-        // Gets to GoogleMap from the MapView and does initialization stuff
-        //map = mapView.getMap();
 
-        Log.e(LOG_TAG, getTag());
+
 
         return v;
     }
@@ -117,7 +110,7 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
         markers = new Marker[stoplist.size()];
         int i = 0;
         for (Stop stop : stoplist) {
-            Log.e(stop.getStop(), stop.getLattitude() + " : " + stop.getLongitude());
+
             optionses[i] = new MarkerOptions();
             if (i % 2 == 0) {
                 optionses[i].title(stop.getStop())

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_alignLeft="@id/tableRowFrom"
-        android:layout_alignParentTop="true"
-        android:paddingTop="10dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_alignLeft="@id/tableRowFrom"
+    android:layout_alignParentTop="true"
+    android:paddingTop="10dp"
 
-               >
+    >
 
     <!---  android:background="@drawable/green_at_ground_all" -->
     <ScrollView
@@ -20,7 +20,7 @@
 
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
 
             <TableRow
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:textAppearance="?android:textAppearanceMedium"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:id="@+id/faretextViewFrom"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                     />
                     <!--style="@style/EditTextlightcool"-->
                     <ImageView
-                        android:layout_gravity="center|right"
+                        android:layout_gravity="center|end"
                         android:id="@+id/fareimageViewCancleFrom"
                         android:visibility="gone"
                         android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
                     android:layout_height="30.0dip"
                     android:layout_marginLeft="8.0dip"
                     android:layout_toRightOf="@id/fareautoCompleteTextViewFindRouteFrom"
-                    android:contentDescription="@string/findfare"
+                    android:contentDescription="@string/select_stop"
                     style="?android:attr/buttonStyleSmall" />
             </TableRow>
 
@@ -79,7 +79,8 @@
                 android:layout_below="@id/faretableRowFrom">
                 <TextView
                     android:textAppearance="?android:textAppearanceMedium"
-                    android:gravity="right" android:id="@+id/faretextViewTo"
+                    android:gravity="end"
+                    android:id="@+id/faretextViewTo"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
                     android:text="@string/To"
@@ -117,6 +118,7 @@
                     android:layout_height="30.0dip"
                     android:layout_marginLeft="8.0dip"
                     android:layout_toRightOf="@id/fareautoCompleteTextViewFindRouteTo"
+                    android:contentDescription="@string/select_stop"
                     style="?android:attr/buttonStyleSmall" />
             </TableRow>
 
@@ -132,6 +134,7 @@
                     android:text="@string/getFare"
                     style="@style/ButtonMtr"
                     android:layout_alignParentRight="true"
+                    android:contentDescription="@string/findfare"
                      />
                 <!-- style="@style/Buttonlightcool"-->
             </RelativeLayout>
@@ -168,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10.0dip"
-                    android:text="`"
+                    android:text="@string/rupay_sign"
                     android:layout_below="@id/textViewFare"
                     android:layout_alignParentRight="true" />
                 <TextView
@@ -178,7 +181,7 @@
                     android:id="@+id/textViewFareAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.0"
+                    tools:text="0.0"
                     android:layout_toLeftOf="@id/textViewFareRupee"
                     android:layout_toStartOf="@id/textViewFareRupee"
                     android:layout_below="@id/textViewFare" />
@@ -188,12 +191,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Via Heaven"
+                tools:text="Via Heaven"
                 android:id="@+id/viaholder"
                 android:layout_below="@+id/relativeLayoutFare"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:textSize="25dp" />
+                android:textSize="25sp" />
 
 
         </RelativeLayout>

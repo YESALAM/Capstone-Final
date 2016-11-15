@@ -8,7 +8,7 @@
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
@@ -16,7 +16,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Emergency Nos"
+                android:text="@string/emergency_label"
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/textView2" />
@@ -31,14 +31,13 @@
                 <TableRow>
                     <TextView
                         android:layout_column="1"
-                        android:text="Services"
-
+                        android:text="@string/service_label"
                         android:textSize="20sp"
                         android:padding="3dip" />
                     <TextView
-                        android:text="Telephone"
+                        android:text="@string/telephone_label"
                         android:textSize="20sp"
-                        android:gravity="right"
+                        android:gravity="end"
                         android:paddingRight="5dp"
                         />
                 </TableRow>
@@ -46,12 +45,12 @@
                 <TableRow>
                     <TextView
                         android:layout_column="1"
-                        android:text="Local Police"
+                        android:text="@string/local_police_label"
                         style="@style/table_row"
                         />
                     <TextView
-                        android:text="100"
-                        android:gravity="right"
+                        android:text="@string/local_police"
+                        android:gravity="end"
                         style="@style/table_row"
                         android:id="@+id/local_police"
 
@@ -61,11 +60,11 @@
                 <TableRow>
                     <TextView
                         android:layout_column="1"
-                        android:text="Woman Helpline"
+                        android:text="@string/woman_helpline_label"
                         style="@style/table_row" />
                     <TextView
-                        android:text="1090"
-                        android:gravity="right"
+                        android:text="@string/woman_helpline"
+                        android:gravity="end"
                         style="@style/table_row"
                         android:id="@+id/woman_helpline"
                         />
@@ -74,33 +73,33 @@
                 <TableRow>
                     <TextView
                         android:layout_column="1"
-                        android:text="CM Helpline"
+                        android:text="@string/cm_helpline_label"
                         style="@style/table_row" />
                     <TextView
-                        android:text="181"
-                        android:gravity="right"
+                        android:text="@string/cm_helpline"
+                        android:gravity="end"
                         android:id="@+id/cm_helpline"
                         style="@style/table_row" />
                 </TableRow>
                 <TableRow>
                     <TextView
                         android:layout_column="1"
-                        android:text="Railway Enquiry"
+                        android:text="@string/railway_enquiry_label"
                         style="@style/table_row" />
                     <TextView
-                        android:text="131"
-                        android:gravity="right"
+                        android:text="@string/railway_enquiry"
+                        android:gravity="end"
                         android:id="@+id/railway_enquiry"
                         style="@style/table_row" />
                 </TableRow>
                 <TableRow>
                     <TextView
                         android:layout_column="1"
-                        android:text="Emergency response Services for\nMedical, Fire Brigade and Police"
+                        android:text="@string/emergency_response_label"
                         style="@style/table_row" />
                     <TextView
-                        android:text="108"
-                        android:gravity="right"
+                        android:text="@string/emergency_response"
+                        android:gravity="end"
                         android:id="@+id/emergency_response_services"
                         style="@style/table_row" />
                 </TableRow>
@@ -113,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
-                android:text="Helpline NOs - BCLL"
+                android:text="@string/helpline_bcll_label"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 />
 
@@ -128,12 +127,12 @@
                 <TableRow>
                     <TextView
                         android:layout_column="1"
-                        android:text="My Bus Help Line"
+                        android:text="@string/mybus_helpline_label"
                         style="@style/table_row"
                         />
                     <TextView
-                        android:text="+91 755-3199966"
-                        android:gravity="right"
+                        android:text="@string/mybus_helpline1"
+                        android:gravity="end"
                         style="@style/table_row"
                         android:autoLink="all"
                         />
@@ -145,41 +144,32 @@
                         android:text=""
                         style="@style/table_row" />
                     <TextView
-                        android:text="+91 755-4074843"
-                        android:gravity="right"
+                        android:text="@string/mybus_helpline2"
+                        android:gravity="end"
                         style="@style/table_row" />
                 </TableRow>
 
                 <TableRow>
                     <TextView
                         android:layout_column="1"
-                        android:text="Chartered Bus(Volvo)"
+                        android:text="@string/charted_bus_label"
                         style="@style/table_row" />
                     <TextView
-                        android:text="+919993288888"
-                        android:gravity="right"
+                        android:text="@string/charted_bus_helpline"
+                        android:gravity="end"
                         style="@style/table_row" />
                 </TableRow>
-              <!--  <TableRow>
-                    <TextView
-                        android:layout_column="1"
-                        android:text="Bhopal->Indore->Bhopal"
-                        style="@style/table_row" />
-                    <TextView
-                        android:text="+91993288888"
-                        android:gravity="right"
-                        style="@style/table_row" />
-                </TableRow>-->
+
                 <TableRow>
                     <TextView
                         android:layout_column="1"
-                        android:text="My Cab(City Taxi Services)"
+                        android:text="@string/my_cab_label"
                         style="@style/table_row"
 
                         />
                     <TextView
-                        android:text="          +91 755-6666666"
-                        android:gravity="right"
+                        android:text="@string/my_cab_helpline"
+                        android:gravity="end"
                         style="@style/table_row"
 
                         />
@@ -191,7 +181,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Office Location"
+                android:text="@string/office_loaction_label"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
                 />

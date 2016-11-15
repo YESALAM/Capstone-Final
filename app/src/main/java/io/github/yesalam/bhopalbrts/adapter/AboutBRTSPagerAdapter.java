@@ -30,7 +30,7 @@ public class AboutBRTSPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return context.getResources().getString(R.string.contact_label) ;
             case 2:
-                return context.getResources().getString(R.string.tandc_label);
+                return context.getResources().getString(R.string.tc_label);
             default:
                 return context.getResources().getString(R.string.default_label) ;
         }

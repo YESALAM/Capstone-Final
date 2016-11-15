@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
 
-    >
+
+
     <!-- android:background="@drawable/green_at_ground_all" -->
     <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp"
             android:clipToPadding="false"
@@ -22,17 +21,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/brts_info"
-                android:text="About BRTS"
+                android:text="@string/title_activity_about_brts"
                 android:textSize="25sp"
                 android:textColor="@color/secondary"
-                android:elevation="10dp"
-
                 android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Bhopal BRTS"
+                    android:text="@string/title_activity_launche"
                     style="@style/AboutTextItem"
                     android:id="@+id/bhopal_brts"
                     android:contentDescription="@string/about_bhopal_brts"
@@ -46,7 +43,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Contact"
+                    android:text="@string/contact_label"
                     style="@style/AboutTextItem"
                     android:id="@+id/contact_brts"
                     android:contentDescription="@string/contact_brts"
@@ -61,7 +58,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Terms and Conditions"
+                    android:text="@string/tc_label"
                     style="@style/AboutTextItem"
                     android:id="@+id/tandc"
                     android:contentDescription="@string/viewtandc"
@@ -79,9 +76,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="About Devlopers"
+                android:text="@string/title_activity_about_devloper"
                 android:textSize="25sp"
-                android:elevation="10dp"
                 android:textColor="@color/secondary"
                 android:textStyle="bold" />
 
@@ -89,7 +85,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="About us"
+                    android:text="@string/aboutus_label"
                     style="@style/AboutTextItem"
                     android:id="@+id/about_us"
                     android:contentDescription="@string/about_developers"
@@ -103,7 +99,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Contact us"
+                    android:text="@string/contactus_label"
                     style="@style/AboutTextItem"
                     android:id="@+id/contact_us"
                     android:contentDescription="@string/contact_developers"
@@ -118,7 +114,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Thanks to you"
+                    android:text="@string/thanku_label"
                     style="@style/AboutTextItem"
                     android:id="@+id/thanku"
                     />
@@ -135,7 +131,3 @@
         </LinearLayout>
 
     </ScrollView>
-
-
-
-</LinearLayout>
